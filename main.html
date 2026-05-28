@@ -7,220 +7,325 @@
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
     <script src="/_sdk/element_sdk.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Source+Sans+3:wght@300;400;600&amp;display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        river: { dark: '#0a1628', mid: '#1a2d4a', light: '#2d4a6f', muted: '#4a6d8c' },
-                        earth: { warm: '#8b6914', sepia: '#d4a853', paper: '#f0e6d2' },
-                        frost: { white: '#e8eef4', grey: '#9cb0c4' }
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&amp;family=Crimson+Text:ital,wght@0,400;0,600;1,400&amp;family=Courier+Prime:wght@400;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
     <style>
-        html, body { height: 100%; margin: 0; }
-        body { font-family: 'Source Sans 3', sans-serif; }
-        .font-display { font-family: 'Playfair Display', serif; }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-up { animation: fadeUp 1s ease forwards; }
+        * { box-sizing: border-box; }
+        html { height: 100%; }
+        body { height: 100%; margin: 0; font-family: 'Crimson Text', serif; background: #0d0d0d; color: #d8d8d8; overflow-x: hidden; line-height: 1.6; }
+        .font-display { font-family: 'IM Fell English', serif; letter-spacing: 0.03em; font-weight: 400; }
+        .font-mono { font-family: 'Courier Prime', monospace; }
 
         .page { display: none; }
         .page.active { display: block; }
 
-        .sepia-overlay {
-            background: linear-gradient(135deg, rgba(139,105,20,0.1) 0%, rgba(212,168,83,0.05) 100%);
-        }
-        .cold-overlay {
-            background: linear-gradient(180deg, rgba(10,22,40,0.95) 0%, rgba(26,45,74,0.9) 100%);
+        @keyframes filmGrain {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(2px, 2px); }
         }
 
-        .nav-link { position: relative; }
+        .grain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            pointer-events: none;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 400 400%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%226%22 numOctaves=%224%22/%3E%3C/filter%3E%3Crect width=%22400%22 height=%22400%22 fill=%22%23fff%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');
+            background-size: 300px 300px;
+            animation: filmGrain 0.15s infinite;
+        }
+
+        .nav-link { position: relative; transition: color 0.4s ease; }
         .nav-link::after {
-            content: ''; position: absolute; bottom: -2px; left: 0; width: 0;
-            height: 1px; background: #d4a853; transition: width 0.3s;
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 0.5px;
+            background: #c9cdd0;
+            transition: width 0.5s ease;
         }
         .nav-link:hover::after, .nav-link.active-link::after { width: 100%; }
 
-        .section-reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-        .section-reveal.visible { opacity: 1; transform: translateY(0); }
-
-        .timeline-line { width: 2px; background: linear-gradient(180deg, #d4a853, #4a6d8c, #2d4a6f); }
-
-        .stat-card { backdrop-filter: blur(10px); background: rgba(26,45,74,0.6); border: 1px solid rgba(156,176,196,0.2); }
-
-        .river-pattern {
-            background-image: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(45,74,111,0.1) 40px, rgba(45,74,111,0.1) 41px);
-        }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0a1628; }
-        ::-webkit-scrollbar-thumb { background: #4a6d8c; border-radius: 3px; }
-
-        /* Editorial homepage styles */
-        .home-hero {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2420 50%, #1a1a1a 100%);
-        }
-
-        .collage-layer {
+        .scroll-reveal {
             opacity: 0;
-            animation: fadeIn 1.2s ease-out forwards;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        #page-home .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
 
-        .collage-layer:nth-child(1) { animation-delay: 0.2s; }
-        .collage-layer:nth-child(2) { animation-delay: 0.4s; }
-        .collage-layer:nth-child(3) { animation-delay: 0.6s; }
-        .collage-layer:nth-child(4) { animation-delay: 0.8s; }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cinematic-image {
+            position: relative;
+            overflow: hidden;
+            background: #0a0a0a;
+        }
+
+        .cinematic-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(15,30,45,0.25) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .doc-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            font-weight: 400;
+        }
+        .doc-subtitle {
+            font-size: clamp(1rem, 2.2vw, 1.4rem);
+            line-height: 1.6;
+            letter-spacing: 0.01em;
+            font-weight: 400;
+        }
+        .doc-caption {
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            opacity: 0.5;
+            font-weight: 600;
+        }
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-size: 2.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0d0d0d; }
+        ::-webkit-scrollbar-thumb { background: #3a3a3a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #5a5a5a; }
     </style>
+    <script src="/_sdk/data_sdk.js"></script>
     <style>body { box-sizing: border-box; }</style>
-    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
     <script src="/_sdk/telemetry_sdk.js"></script></head>
-<body class="h-full bg-slate-950 text-stone-100 overflow-x-hidden">
-<div id="app-wrapper" class="h-full w-full overflow-auto">
+<body>
+<div id="app-wrapper" class="w-full">
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-500" id="main-nav">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="font-display text-lg text-stone-400 tracking-wide cursor-pointer" onclick="navigateTo('home')">
-                The Red River
+    <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-700" id="main-nav" style="background: transparent;">
+        <div class="px-6 md:px-12 py-6 flex items-center justify-between">
+            <div class="font-display text-lg tracking-widest cursor-pointer text-white/60 hover:text-white/100 transition-colors" onclick="navigateTo('home')">
+                RED RIVER
             </div>
-            <div class="hidden md:flex items-center gap-8 text-sm tracking-wider uppercase">
-                <a class="nav-link active-link text-stone-100 cursor-pointer" data-page="home" onclick="navigateTo('home')">Home</a> <a class="nav-link text-stone-400 cursor-pointer" data-page="history" onclick="navigateTo('history')">History</a> <a class="nav-link text-stone-400 cursor-pointer" data-page="wastewater" onclick="navigateTo('wastewater')">Wastewater</a> <a class="nav-link text-stone-400 cursor-pointer" data-page="environment" onclick="navigateTo('environment')">Environment</a>
-            </div><button class="md:hidden text-stone-100" onclick="toggleMobile()"><i data-lucide="menu" class="w-6 h-6"></i></button>
+            <div class="hidden md:flex items-center gap-12 text-xs tracking-widest">
+                <a class="nav-link active-link text-white/90 cursor-pointer" data-page="home" onclick="navigateTo('home')">HOME</a> <a class="nav-link text-white/40 cursor-pointer" data-page="history" onclick="navigateTo('history')">HISTORY</a> <a class="nav-link text-white/40 cursor-pointer" data-page="wastewater" onclick="navigateTo('wastewater')">WASTEWATER</a> <a class="nav-link text-white/40 cursor-pointer" data-page="environment" onclick="navigateTo('environment')">ENVIRONMENT</a>
+            </div><button class="md:hidden text-white/70" onclick="toggleMobile()"><i data-lucide="menu" class="w-5 h-5"></i></button>
         </div><!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-950/95 backdrop-blur-md px-6 py-4 space-y-4">
-            <a class="block text-stone-100 cursor-pointer" onclick="navigateTo('home'); toggleMobile()">Home</a> <a class="block text-stone-400 cursor-pointer" onclick="navigateTo('history'); toggleMobile()">History</a> <a class="block text-stone-400 cursor-pointer" onclick="navigateTo('wastewater'); toggleMobile()">Wastewater</a> <a class="block text-stone-400 cursor-pointer" onclick="navigateTo('environment'); toggleMobile()">Environment</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-black/90 backdrop-blur px-6 py-6 space-y-4 border-t border-white/5">
+            <a class="block text-white/90 cursor-pointer tracking-widest text-xs" onclick="navigateTo('home'); toggleMobile()">HOME</a> <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('history'); toggleMobile()">HISTORY</a> <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('wastewater'); toggleMobile()">WASTEWATER</a> <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('environment'); toggleMobile()">ENVIRONMENT</a>
         </div>
-    </nav><!-- HOME PAGE - EDITORIAL SPLIT SCREEN -->
+    </nav><!-- HOME PAGE - CINEMATIC SPLIT -->
     <div id="page-home" class="page active">
-        <section class="relative w-full min-h-screen home-hero"><!-- Paper texture overlay -->
-            <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=%22100%22 height=%22100%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22/%3E%3C/filter%3E%3Crect width=%22100%22 height=%22100%22 fill=%22%23fff%22 filter=%22url(%23noise)%22/%3E%3C/svg%3E'); background-size: 200px 200px;"></div><!-- LEFT SIDE: TEXT CONTENT -->
-            <div class="relative z-20 flex min-h-screen flex-col justify-center px-8 md:px-12 lg:px-16 w-full md:w-1/2">
-                <div class="max-w-xl"><!-- Minimal label -->
-                    <p class="text-slate-500 text-xs uppercase tracking-[0.2em] mb-8 opacity-70 font-light">Documentary</p><!-- Main title -->
-                    <h1 id="hero-title" class="font-display text-5xl md:text-6xl lg:text-7xl leading-tight mb-6 text-stone-50 font-light animate-fade-up" style="animation-delay: 0.1s;">The Red River</h1><!-- Subtitle: the central tension -->
-                    <p id="hero-sub" class="text-lg md:text-xl text-stone-300 font-light leading-relaxed mb-8 animate-fade-up" style="animation-delay: 0.2s;">The river that built Winnipeg — and the river now threatened by it.</p><!-- Reflective text -->
-                    <p class="text-sm md:text-base text-stone-400 leading-relaxed mb-12 max-w-md font-light italic animate-fade-up" style="animation-delay: 0.3s;">For thousands of years, people gathered around these waters. Today, billions of litres of wastewater flow through the same river system.</p><!-- Enter button -->
-                    <div class="animate-fade-up" style="animation-delay: 0.4s;"><button onclick="navigateTo('history')" class="group relative inline-flex items-center gap-3 text-stone-300 text-sm uppercase tracking-widest hover:text-stone-100 transition-colors duration-500"> <span>Enter the Story</span> <span class="w-8 h-px bg-gradient-to-r from-stone-500 to-stone-600 group-hover:from-stone-300 group-hover:to-stone-400 transition-all"></span> </button>
+        <section class="relative w-full min-h-screen bg-black">
+            <div class="grain"></div><!-- LEFT SIDE: MINIMAL TEXT -->
+            <div class="relative z-20 flex min-h-screen flex-col justify-center px-8 md:px-16 lg:px-20 py-24 w-full md:w-1/2">
+                <div class="max-w-lg">
+                    <div class="scroll-reveal" style="transition-delay: 0.15s; animation-delay: 0.3s;">
+                    <h1 id="hero-title" class="doc-title text-white mb-12 leading-tight">The Red<br>
+                            River</h1>
+                    </div>
+                    <div class="scroll-reveal" style="transition-delay: 0.25s; animation-delay: 0.6s;">
+                        <p id="hero-sub" class="doc-subtitle text-white/70 mb-12 leading-relaxed">The river that built Winnipeg — and the river now threatened by it.</p>
+                    </div>
+                    <div class="scroll-reveal space-y-8" style="transition-delay: 0.35s; animation-delay: 0.9s;">
+                        <p class="text-white/50 text-sm leading-relaxed max-w-md font-light">For thousands of years, people gathered around these waters. Today, billions of litres of wastewater flow through the same river system.</p><button onclick="navigateTo('history')" class="group text-white/80 text-xs tracking-widest hover:text-white transition-colors duration-500 flex items-center gap-4"> <span>ENTER THE STORY</span> <span class="w-8 h-px bg-white/20 group-hover:bg-white/40 transition-all"></span> </button>
                     </div>
                 </div>
-            </div><!-- RIGHT SIDE: VISUAL COLLAGE -->
-            <div class="absolute inset-0 w-full md:w-1/2 md:right-0 md:left-1/2 z-10">
-                <div class="relative w-full h-full overflow-hidden"><!-- Base atmospheric layer -->
-                    <div class="collage-layer absolute inset-0 bg-gradient-to-br from-slate-800/80 via-stone-800/40 to-slate-900/60"></div><!-- Historical map fragment (faded) -->
-                    <svg class="collage-layer absolute inset-0 w-full h-full opacity-[0.15]" preserveaspectratio="xMidYMid slice" viewbox="0 0 1200 800"><defs>
-                        <pattern id="mapPattern" x="0" y="0" width="150" height="150" patternunits="userSpaceOnUse">
-                            <path d="M30,30 Q75,50 120,80" stroke="#b0b0b0" stroke-width="0.8" fill="none" opacity="0.5" />
-                            <path d="M40,100 Q80,75 130,110" stroke="#b0b0b0" stroke-width="0.6" fill="none" opacity="0.3" />
-                            <circle cx="75" cy="60" r="3" fill="#b0b0b0" opacity="0.4" />
-                            <circle cx="110" cy="120" r="2" fill="#b0b0b0" opacity="0.25" />
-                            <text x="75" y="30" font-size="8" fill="#b0b0b0" opacity="0.25" text-anchor="middle" font-family="serif" font-style="italic">
-                                Red River
-                            </text>
-                        </pattern>
-                    </defs> <rect width="100%" height="100%" fill="url(#mapPattern)" />
-                    </svg><!-- River texture bands -->
-                    <div class="collage-layer absolute inset-0 pointer-events-none">
-                        <div class="absolute top-1/4 left-0 w-full h-48 bg-gradient-to-r from-transparent via-slate-600/15 to-transparent blur-3xl"></div>
-                        <div class="absolute top-1/2 left-0 w-full h-56 bg-gradient-to-r from-stone-700/10 via-slate-700/20 to-stone-700/10 blur-3xl"></div>
-                        <div class="absolute bottom-1/4 left-0 w-full h-40 bg-gradient-to-r from-transparent via-slate-500/8 to-transparent blur-3xl"></div>
-                    </div><!-- Documentary-style caption -->
-                    <div class="collage-layer absolute bottom-12 left-6 right-6 z-20 pointer-events-none">
-                        <p class="text-xs text-stone-400 mb-2 font-mono tracking-wide">The Forks, Winnipeg</p>
-                        <p class="text-xs text-stone-500 italic font-light">Where the Red and Assiniboine rivers converge, 2024</p>
-                    </div><!-- Aged photograph vignette -->
-                    <div class="collage-layer absolute inset-0 bg-radial-gradient from-transparent via-transparent to-stone-950/40"></div><!-- Film grain texture -->
-                    <div class="collage-layer absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 1000 1000%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22grain%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%225%22 numOctaves=%224%22 result=%22noise%22/%3E%3C/filter%3E%3Crect width=%221000%22 height=%221000%22 fill=%22%23fff%22 filter=%22url(%23grain)%22 opacity=%220.5%22/%3E%3C/svg%3E'); background-size: 300px 300px;"></div><!-- Subtle dividing line (visible on desktop) -->
-                    <div class="hidden md:block absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-stone-600/20 to-transparent z-30"></div>
-                </div>
-            </div>
+            </div><!-- RIGHT SIDE: CINEMATIC IMAGE -->
+            <div class="hidden md:block absolute inset-0 w-1/2 right-0 z-10 cinematic-image">
+                <!-- Atmospheric layers -->
+                <div class="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-950/40 to-black/60"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-transparent to-transparent"></div><!-- Water/river visualization -->
+                <svg class="absolute inset-0 w-full h-full" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 800">
+                    <defs>
+                        <lineargradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#1a2a3a;stop-opacity:0.9" />
+                            <stop offset="40%" style="stop-color:#0f1a2a;stop-opacity:0.95" />
+                            <stop offset="100%" style="stop-color:#050808;stop-opacity:1" />
+                        </lineargradient>
+                        <radialgradient id="fogGrad" cx="50%" cy="15%">
+                            <stop offset="0%" style="stop-color:#3a5a7a;stop-opacity:0.25" />
+                            <stop offset="100%" style="stop-color:#0d0d0d;stop-opacity:0" />
+                        </radialgradient>
+                    </defs> <!-- Water base --> <rect width="1000" height="800" fill="url(#waterGrad)" /> <!-- Undulating water surface --> <path d="M0,320 Q125,280 250,320 T500,320 T750,320 T1000,320 L1000,800 L0,800 Z" fill="#0a1520" opacity="0.5" /> <path d="M0,400 Q125,360 250,400 T500,400 T750,400 T1000,400 L1000,800 L0,800 Z" fill="#050a10" opacity="0.4" /> <!-- Atmospheric fog --> <circle cx="500" cy="180" r="380" fill="url(#fogGrad)" opacity="0.7" /> <!-- Distant reflections --> <circle cx="250" cy="240" r="70" fill="#4a6a8a" opacity="0.12" /> <circle cx="750" cy="270" r="90" fill="#3a5a7a" opacity="0.1" /> <!-- Documentary typeface --> <text x="80" y="750" font-family="'Courier Prime', monospace" font-size="11" fill="#7a8a96" opacity="0.5" letter-spacing="3">
+                    THE RED RIVER, WINTER
+                </text> <text x="80" y="770" font-family="'Courier Prime', monospace" font-size="10" fill="#5a6a76" opacity="0.35" letter-spacing="2">
+                    Confluence of two systems
+                </text>
+                </svg><!-- Dark vignette -->
+                <div class="absolute inset-0 bg-radial-gradient from-transparent to-black/50"></div>
+            </div><!-- Vertical dividing line (desktop) -->
+            <div class="hidden md:block absolute inset-y-0 left-1/2 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent z-30"></div>
         </section>
-    </div><!-- HISTORY PAGE -->
+    </div><!-- HISTORY PAGE - VERTICAL TIMELINE -->
     <div id="page-history" class="page">
-        <section class="pt-24 pb-16 px-6 sepia-overlay" style="min-height:100%">
-            <div class="max-w-5xl mx-auto">
-                <div class="section-reveal text-center mb-16">
-                    <p class="text-earth-sepia uppercase tracking-[0.2em] text-xs mb-4">Chapter One</p>
-                    <h1 class="font-display text-4xl md:text-5xl mb-4">History of the Red River</h1>
-                    <p class="text-frost-grey max-w-2xl mx-auto">A journey through six millennia of human connection to these waters.</p>
-                </div><!-- Timeline -->
+        <section class="w-full bg-black pt-32 pb-20 px-8 md:px-16 lg:px-20">
+            <div class="grain"></div>
+            <div class="max-w-6xl mx-auto relative z-10">
+                <!-- Page Header -->
+                <div class="scroll-reveal mb-32 text-center">
+                    <h1 class="doc-title text-white mb-4">History of the<br>
+                        Red River</h1>
+                    <p class="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto">A journey through six millennia of human connection to these waters.</p>
+                </div><!-- TIMELINE CONTAINER -->
                 <div class="relative">
-                    <div class="absolute left-4 md:left-1/2 top-0 bottom-0 timeline-line md:-translate-x-1/2"></div><!-- First Nations -->
-                    <div class="section-reveal relative pl-12 md:pl-0 md:grid md:grid-cols-2 gap-8 mb-20">
-                        <div class="md:text-right md:pr-12">
-                            <p class="text-earth-sepia text-sm uppercase tracking-wider mb-2">6,000+ Years Ago</p>
-                            <h3 class="font-display text-2xl mb-4">First Nations Peoples</h3>
-                            <p class="text-frost-grey leading-relaxed">For over six thousand years, Indigenous peoples — including the Anishinaabe, Cree, Oji-Cree, Dakota, and Métis — used the Red River as a vital corridor for fishing, transportation, trade, and ceremony. The river sustained communities with sturgeon, catfish, and goldeye, while its banks provided gathering places for seasonal camps.</p>
-                        </div>
-                        <div class="mt-6 md:mt-0 md:pl-12">
-                            <div class="bg-river-mid/50 rounded-lg p-6 border border-earth-sepia/20">
-                                <svg viewbox="0 0 300 200" class="w-full rounded">
-                                    <rect width="300" height="200" fill="#1a2d4a" /> <path d="M0,150 Q75,130 150,145 Q225,160 300,140 L300,200 L0,200Z" fill="#2d4a6f" opacity="0.7" /> <path d="M0,160 Q100,150 200,165 Q250,170 300,155 L300,200 L0,200Z" fill="#4a6d8c" opacity="0.5" /> <circle cx="80" cy="90" r="3" fill="#d4a853" /> <circle cx="150" cy="80" r="3" fill="#d4a853" /> <circle cx="220" cy="95" r="3" fill="#d4a853" /> <path d="M80,90 L150,80 L220,95" stroke="#d4a853" stroke-width="0.5" fill="none" stroke-dasharray="4,4" /> <text x="150" y="30" text-anchor="middle" fill="#9cb0c4" font-size="10" font-family="serif" font-style="italic">
-                                    Trading Routes Along the River
-                                </text>
-                                </svg>
+                    <!-- Center timeline line (desktop only) -->
+                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-gradient-to-b from-white/10 via-white/5 to-transparent"></div><!-- TIMELINE ITEM 1: Left (Indigenous & Forks) -->
+                    <div class="scroll-reveal mb-32 md:mb-40">
+                        <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+                            <!-- Left content -->
+                            <div class="md:text-right md:pr-12">
+                                <p class="doc-caption text-white/40 mb-2">6,000+ YEARS AGO</p>
+                                <h2 class="doc-subtitle text-white mb-6">First Nations Peoples</h2>
+                                <p class="text-white/60 leading-relaxed text-sm mb-4">For over six thousand years, Indigenous nations — the Anishinaabe, Cree, Oji-Cree, Dakota, and Métis — depended on this river. Sturgeon, catfish, and goldeye filled nets and sustained seasonal camps. The river's rhythm determined calendars — when to harvest, when to move, when to gather.</p>
+                                <p class="text-white/50 leading-relaxed text-xs border-l-2 md:border-l-0 md:border-r-2 border-white/20 pl-4 md:pl-0 md:pr-4">Where the Red and Assiniboine rivers converge, The Forks was already a gathering place for thousands of years. Trade, ceremony, diplomacy, and seasonal gatherings happened here long before European contact. The rivers were highways—birch bark canoes carried goods and stories across interconnected waterways. This convergence held power. It still does.</p>
+                            </div><!-- Right image (desktop) / Below (mobile) -->
+                            <div class="mt-8 md:mt-0">
+                                <div class="relative h-64 md:h-72 bg-slate-900/40 rounded overflow-hidden cinematic-image border border-white/10">
+                                    <svg class="w-full h-full" preserveaspectratio="xMidYMid slice" viewbox="0 0 600 400">
+                                        <defs>
+                                            <lineargradient id="riverGrad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                <stop offset="0%" style="stop-color:#2a4a5a" />
+                                                <stop offset="100%" style="stop-color:#0a1a2a" />
+                                            </lineargradient>
+                                        </defs> <rect width="600" height="400" fill="url(#riverGrad1)" /> <!-- River curves --> <path d="M150,80 Q200,150 180,250" stroke="#4a7a9a" stroke-width="3" fill="none" opacity="0.6" /> <path d="M300,100 Q350,200 320,350" stroke="#4a7a9a" stroke-width="3" fill="none" opacity="0.5" /> <!-- Confluence point --> <circle cx="280" cy="200" r="8" fill="#6a9aba" opacity="0.8" /> <!-- Document label --> <text x="20" y="380" font-family="'Courier Prime', monospace" font-size="10" fill="#5a7a8a" opacity="0.6" letter-spacing="2">
+                                        TRADING ROUTES ALONG THE RIVER
+                                    </text>
+                                    </svg>
+                                </div>
+                            </div><!-- Timeline dot (desktop) -->
+                            <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-24">
+                                <div class="w-4 h-4 bg-white/30 rounded-full ring-2 ring-white/10"></div>
                             </div>
                         </div>
-                    </div><!-- Fur Trade -->
-                    <div class="section-reveal relative pl-12 md:pl-0 md:grid md:grid-cols-2 gap-8 mb-20">
-                        <div class="md:pr-12 md:order-2 md:pl-12">
-                            <p class="text-earth-sepia text-sm uppercase tracking-wider mb-2">1600s — 1800s</p>
-                            <h3 class="font-display text-2xl mb-4">The Fur Trade Era</h3>
-                            <p class="text-frost-grey leading-relaxed">European fur traders recognized the Red River as a critical transportation network connecting Hudson Bay to the interior. The Hudson's Bay Company and North West Company established posts along the river, transforming it into a highway of commerce. Voyageurs paddled enormous canoes laden with beaver pelts, forever altering the region's economic and social landscape.</p>
-                        </div>
-                        <div class="mt-6 md:mt-0 md:text-right md:pr-12 md:order-1">
-                            <div class="bg-earth-warm/10 rounded-lg p-6 border border-earth-sepia/20">
-                                <svg viewbox="0 0 300 200" class="w-full rounded">
-                                    <rect width="300" height="200" fill="#2a1f0f" /> <rect x="20" y="20" width="260" height="160" fill="none" stroke="#d4a853" stroke-width="0.5" opacity="0.5" /> <path d="M30,100 C80,60 150,140 220,80 C250,60 280,90 290,85" stroke="#8b6914" stroke-width="2" fill="none" /> <path d="M40,130 C100,120 180,150 260,125" stroke="#4a6d8c" stroke-width="1.5" fill="none" stroke-dasharray="3,3" /> <rect x="60" y="70" width="8" height="8" fill="#d4a853" opacity="0.7" /> <rect x="160" y="100" width="8" height="8" fill="#d4a853" opacity="0.7" /> <rect x="240" y="65" width="8" height="8" fill="#d4a853" opacity="0.7" /> <text x="150" y="185" text-anchor="middle" fill="#d4a853" font-size="9" font-family="serif">
-                                    Historical Map — Fur Trade Routes, c. 1780
-                                </text>
-                                </svg>
+                    </div><!-- TIMELINE ITEM 2: Right (Fur Trade) -->
+                    <div class="scroll-reveal mb-32 md:mb-40">
+                        <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+                            <!-- Left image (hidden on mobile) -->
+                            <div class="hidden md:block">
+                                <div class="relative h-72 bg-slate-900/40 rounded overflow-hidden cinematic-image border border-white/10">
+                                    <svg class="w-full h-full" preserveaspectratio="xMidYMid slice" viewbox="0 0 600 400">
+                                        <defs>
+                                            <lineargradient id="tradeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                <stop offset="0%" style="stop-color:#3a2a1a" />
+                                                <stop offset="100%" style="stop-color:#1a1a0a" />
+                                            </lineargradient>
+                                        </defs> <rect width="600" height="400" fill="url(#tradeGrad)" /> <!-- Trading post --> <rect x="250" y="180" width="100" height="80" fill="#4a3a2a" stroke="#6a5a4a" stroke-width="1" /> <!-- Canoes approaching --> <path d="M100,200 Q150,180 200,190" stroke="#5a7a6a" stroke-width="2" fill="none" /> <path d="M500,210 Q450,190 420,200" stroke="#5a7a6a" stroke-width="2" fill="none" /> <!-- Document label --> <text x="20" y="380" font-family="'Courier Prime', monospace" font-size="10" fill="#6a5a4a" opacity="0.6" letter-spacing="2">
+                                        FUR TRADE ROUTES • 1700
+                                    </text>
+                                    </svg>
+                                </div>
+                            </div><!-- Right content -->
+                            <div class="md:pl-12">
+                                <p class="doc-caption text-white/40 mb-2">1600s — 1800s</p>
+                                <h2 class="doc-subtitle text-white mb-6">The Fur Trade Era</h2>
+                                <p class="text-white/60 leading-relaxed text-sm">European fur traders recognized the Red River as a critical transportation network connecting Hudson Bay to the interior. The Hudson's Bay Company and North West Company established trading posts along the river. Voyageurs paddled enormous canoes laden with beaver pelts, forever altering the region's economic and social landscape.</p>
+                            </div><!-- Image for mobile -->
+                            <div class="md:hidden mt-8">
+                                <div class="relative h-64 bg-slate-900/40 rounded overflow-hidden cinematic-image border border-white/10">
+                                    <svg class="w-full h-full" preserveaspectratio="xMidYMid slice" viewbox="0 0 600 400">
+                                        <defs>
+                                            <lineargradient id="tradeGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                <stop offset="0%" style="stop-color:#3a2a1a" />
+                                                <stop offset="100%" style="stop-color:#1a1a0a" />
+                                            </lineargradient>
+                                        </defs> <rect width="600" height="400" fill="url(#tradeGrad2)" /> <rect x="250" y="180" width="100" height="80" fill="#4a3a2a" stroke="#6a5a4a" stroke-width="1" /> <path d="M100,200 Q150,180 200,190" stroke="#5a7a6a" stroke-width="2" fill="none" /> <path d="M500,210 Q450,190 420,200" stroke="#5a7a6a" stroke-width="2" fill="none" /> <text x="20" y="380" font-family="'Courier Prime', monospace" font-size="10" fill="#6a5a4a" opacity="0.6" letter-spacing="2">
+                                        FUR TRADE ROUTES • 1700
+                                    </text>
+                                    </svg>
+                                </div>
+                            </div><!-- Timeline dot (desktop) -->
+                            <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-24">
+                                <div class="w-4 h-4 bg-white/30 rounded-full ring-2 ring-white/10"></div>
                             </div>
                         </div>
-                    </div><!-- Settlers -->
-                    <div class="section-reveal relative pl-12 md:pl-0 md:grid md:grid-cols-2 gap-8 mb-20">
-                        <div class="md:text-right md:pr-12">
-                            <p class="text-earth-sepia text-sm uppercase tracking-wider mb-2">1812 — 1900s</p>
-                            <h3 class="font-display text-2xl mb-4">Early Settlers &amp; Agriculture</h3>
-                            <p class="text-frost-grey leading-relaxed">The Selkirk Settlers arrived in 1812, establishing the Red River Colony. They depended entirely on the river for drinking water, irrigation, and transportation. The rich alluvial soil deposited by centuries of flooding made the surrounding land extraordinarily fertile, giving rise to Manitoba's agricultural identity. Peter Rindisbacher documented this era in vivid watercolors.</p>
-                        </div>
-                        <div class="mt-6 md:mt-0 md:pl-12">
-                            <div class="bg-earth-paper/5 rounded-lg p-6 border border-earth-sepia/20">
-                                <svg viewbox="0 0 300 200" class="w-full rounded">
-                                    <rect width="300" height="200" fill="#f0e6d2" opacity="0.1" /> <rect width="300" height="200" fill="#1a2d4a" /> <!-- Landscape sketch style --> <path d="M0,140 C50,135 100,130 150,138 C200,146 250,132 300,136" stroke="#d4a853" stroke-width="1" fill="none" /> <rect x="80" y="110" width="20" height="28" fill="none" stroke="#d4a853" stroke-width="0.8" /> <polygon points="80,110 90,100 100,110" fill="none" stroke="#d4a853" stroke-width="0.8" /> <rect x="180" y="115" width="25" height="23" fill="none" stroke="#d4a853" stroke-width="0.8" /> <polygon points="180,115 192,104 205,115" fill="none" stroke="#d4a853" stroke-width="0.8" /> <path d="M0,170 Q150,160 300,172" stroke="#4a6d8c" stroke-width="2" fill="none" opacity="0.6" /> <text x="150" y="25" text-anchor="middle" fill="#9cb0c4" font-size="9" font-family="serif" font-style="italic">
-                                    After Peter Rindisbacher, c. 1822
-                                </text>
-                                </svg>
+                    </div><!-- TIMELINE ITEM 3: Left (Settlers & Agriculture) -->
+                    <div class="scroll-reveal mb-32 md:mb-40">
+                        <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+                            <!-- Left content -->
+                            <div class="md:text-right md:pr-12">
+                                <p class="doc-caption text-white/40 mb-2">1812 ONWARD</p>
+                                <h2 class="doc-subtitle text-white mb-6">Settlers &amp; Agriculture</h2>
+                                <p class="text-white/60 leading-relaxed text-sm">The Selkirk Settlers arrived in 1812. They depended entirely on the river for water, irrigation, and transportation. The rich alluvial soil made the land extraordinarily fertile. Agriculture became the backbone of the region. Peter Rindisbacher documented this era in watercolors: farmsteads, river crossings, and the raw work of settlement.</p>
+                            </div><!-- Right image -->
+                            <div class="mt-8 md:mt-0">
+                                <div class="relative h-64 md:h-72 bg-slate-900/40 rounded overflow-hidden cinematic-image border border-white/10">
+                                    <svg class="w-full h-full" preserveaspectratio="xMidYMid slice" viewbox="0 0 600 400">
+                                        <defs>
+                                            <lineargradient id="farmGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                <stop offset="0%" style="stop-color:#3a4a2a" />
+                                                <stop offset="100%" style="stop-color:#1a2a0a" />
+                                            </lineargradient>
+                                        </defs> <rect width="600" height="400" fill="url(#farmGrad)" /> <!-- River --> <path d="M0,250 Q150,240 300,250 T600,250 L600,400 L0,400 Z" fill="#1a3a3a" opacity="0.7" /> <!-- Fields --> <rect x="50" y="120" width="500" height="80" fill="#2a4a1a" opacity="0.5" /> <!-- Farmstead --> <rect x="250" y="150" width="60" height="50" fill="#5a3a1a" /> <polygon points="280,150 260,120 300,120" fill="#6a4a2a" /> <!-- Document label --> <text x="20" y="380" font-family="'Courier Prime', monospace" font-size="10" fill="#4a5a3a" opacity="0.6" letter-spacing="2">
+                                        RED RIVER SETTLEMENT • 1820S
+                                    </text>
+                                    </svg>
+                                </div>
+                            </div><!-- Timeline dot (desktop) -->
+                            <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-24">
+                                <div class="w-4 h-4 bg-white/30 rounded-full ring-2 ring-white/10"></div>
                             </div>
                         </div>
-                    </div><!-- The Forks -->
-                    <div class="section-reveal relative pl-12 md:pl-0 md:grid md:grid-cols-2 gap-8">
-                        <div class="md:pr-12 md:order-2 md:pl-12">
-                            <p class="text-earth-sepia text-sm uppercase tracking-wider mb-2">A Sacred Meeting Place</p>
-                            <h3 class="font-display text-2xl mb-4">The Forks</h3>
-                            <p class="text-frost-grey leading-relaxed">Where the Red and Assiniboine rivers meet, The Forks has served as a gathering place for over 6,000 years. Long before European contact, it was a crossroads for trade, diplomacy, and ceremony. Today it remains Winnipeg's cultural heart — a living testament to the continuity between past and present, water and people, land and memory.</p>
-                        </div>
-                        <div class="mt-6 md:mt-0 md:text-right md:pr-12 md:order-1">
-                            <div class="bg-river-mid/30 rounded-lg p-8 border border-earth-sepia/20 text-center">
-                                <svg viewbox="0 0 200 200" class="w-32 h-32 mx-auto mb-4">
-                                    <circle cx="100" cy="100" r="90" fill="none" stroke="#d4a853" stroke-width="0.5" /> <path d="M100,20 L100,100" stroke="#4a6d8c" stroke-width="3" /> <path d="M40,60 L100,100" stroke="#2d4a6f" stroke-width="2.5" /> <path d="M100,100 L100,180" stroke="#4a6d8c" stroke-width="4" /> <circle cx="100" cy="100" r="6" fill="#d4a853" /> <text x="115" y="55" fill="#9cb0c4" font-size="8">
-                                    Red
-                                </text> <text x="45" y="50" fill="#9cb0c4" font-size="8">
-                                    Assiniboine
-                                </text>
-                                </svg>
-                                <p class="text-frost-grey text-sm italic font-display">The confluence — where two rivers become one</p>
+                    </div><!-- TIMELINE ITEM 4: Right (Modern Winnipeg & Manitoba) -->
+                    <div class="scroll-reveal">
+                        <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+                            <!-- Left image (hidden on mobile) -->
+                            <div class="hidden md:block">
+                                <div class="relative h-72 bg-slate-900/40 rounded overflow-hidden cinematic-image border border-white/10">
+                                    <svg class="w-full h-full" preserveaspectratio="xMidYMid slice" viewbox="0 0 600 400">
+                                        <defs>
+                                            <lineargradient id="modernGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                <stop offset="0%" style="stop-color:#2a3a5a" />
+                                                <stop offset="100%" style="stop-color:#0a1a3a" />
+                                            </lineargradient>
+                                        </defs> <rect width="600" height="400" fill="url(#modernGrad)" /> <!-- River (more prominent) --> <path d="M150,0 Q200,100 180,200 Q160,300 200,400" stroke="#4a8aaa" stroke-width="20" fill="none" opacity="0.8" /> <!-- City bridges --> <line x1="160" y1="180" x2="400" y2="190" stroke="#6a7a8a" stroke-width="2" opacity="0.7" /> <line x1="170" y1="220" x2="420" y2="230" stroke="#6a7a8a" stroke-width="2" opacity="0.7" /> <!-- Parks/gathering spaces --> <circle cx="100" cy="150" r="25" fill="#2a5a3a" opacity="0.6" /> <circle cx="450" cy="250" r="25" fill="#2a5a3a" opacity="0.6" /> <!-- Document label --> <text x="20" y="380" font-family="'Courier Prime', monospace" font-size="10" fill="#4a6a8a" opacity="0.6" letter-spacing="2">
+                                        MODERN WINNIPEG • TODAY
+                                    </text>
+                                    </svg>
+                                </div>
+                            </div><!-- Right content -->
+                            <div class="md:pl-12">
+                                <p class="doc-caption text-white/40 mb-2">TODAY</p>
+                                <h2 class="doc-subtitle text-white mb-6">Winnipeg &amp; Manitoba Identity</h2>
+                                <p class="text-white/60 leading-relaxed text-sm mb-4">Winnipeg grew up along these rivers. Bridges connected neighborhoods. In winter, the frozen surface became a gathering place — skating trails, ice fishing, crossing from downtown to Osborne Village on foot. In spring, the flood watch begins. The river's rhythm still shapes the calendar.</p>
+                                <p class="text-white/60 leading-relaxed text-sm mb-4">The Forks transformed into a public gathering place. Assiniboine Park, the riverbanks, the pathways — these remain central to how Winnipeggers experience their city. The river walks define seasons. The bridges define neighborhoods. Downtown Winnipeg exists because of where the river flows.</p>
+                                <p class="text-white/50 leading-relaxed text-sm italic">For many, the river is memory: walking along the water with family, the smell of winter air, the sight of geese returning in spring. The Red River is woven into how Manitobans understand home. It is not just infrastructure. It is identity. It is why we live here.</p>
+                            </div>
+                            <div class="md:hidden mt-8">
+                                <div class="relative h-64 bg-slate-900/40 rounded overflow-hidden cinematic-image border border-white/10">
+                                    <svg class="w-full h-full" preserveaspectratio="xMidYMid slice" viewbox="0 0 600 400">
+                                        <defs>
+                                            <lineargradient id="modernGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                <stop offset="0%" style="stop-color:#2a3a5a" />
+                                                <stop offset="100%" style="stop-color:#0a1a3a" />
+                                            </lineargradient>
+                                        </defs> <rect width="600" height="400" fill="url(#modernGrad2)" /> <path d="M150,0 Q200,100 180,200 Q160,300 200,400" stroke="#4a8aaa" stroke-width="20" fill="none" opacity="0.8" /> <line x1="160" y1="180" x2="400" y2="190" stroke="#6a7a8a" stroke-width="2" opacity="0.7" /> <line x1="170" y1="220" x2="420" y2="230" stroke="#6a7a8a" stroke-width="2" opacity="0.7" /> <circle cx="100" cy="150" r="25" fill="#2a5a3a" opacity="0.6" /> <circle cx="450" cy="250" r="25" fill="#2a5a3a" opacity="0.6" /> <text x="20" y="380" font-family="'Courier Prime', monospace" font-size="10" fill="#4a6a8a" opacity="0.6" letter-spacing="2">
+                                        MODERN WINNIPEG • TODAY
+                                    </text>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -229,109 +334,59 @@
         </section>
     </div><!-- WASTEWATER PAGE -->
     <div id="page-wastewater" class="page">
-        <section class="pt-24 pb-16 px-6 cold-overlay" style="min-height:100%">
-            <div class="max-w-5xl mx-auto">
-                <div class="section-reveal text-center mb-16">
-                    <p class="text-river-muted uppercase tracking-[0.2em] text-xs mb-4">Chapter Two</p>
-                    <h1 class="font-display text-4xl md:text-5xl mb-4">Wastewater &amp; Modern Winnipeg</h1>
-                    <p class="text-frost-grey max-w-2xl mx-auto">The hidden crisis beneath a modern city.</p>
-                </div><!-- Stats row -->
-                <div class="section-reveal grid md:grid-cols-3 gap-6 mb-16">
-                    <div class="stat-card p-6 rounded-lg text-center">
-                        <div class="text-red-400 text-3xl font-display mb-1">
-                            ~70
-                        </div>
-                        <div class="text-frost-grey text-sm">
-                            Combined Sewer Overflow events per year
-                        </div>
-                    </div>
-                    <div class="stat-card p-6 rounded-lg text-center">
-                        <div class="text-red-400 text-3xl font-display mb-1">
-                            Billions L
-                        </div>
-                        <div class="text-frost-grey text-sm">
-                            Of partially treated sewage released annually
-                        </div>
-                    </div>
-                    <div class="stat-card p-6 rounded-lg text-center">
-                        <div class="text-red-400 text-3xl font-display mb-1">
-                            100+ yrs
-                        </div>
-                        <div class="text-frost-grey text-sm">
-                            Age of some sewer infrastructure
+        <section class="w-full min-h-screen bg-black pt-32 pb-16 px-8 md:px-16">
+            <div class="grain"></div>
+            <div class="max-w-5xl mx-auto relative z-10">
+                <div class="scroll-reveal mb-24">
+                    <p class="doc-caption text-white/40 mb-4">CHAPTER TWO</p>
+                    <h1 class="doc-title text-white mb-8">Wastewater &amp;<br>
+                        Modern Winnipeg</h1>
+                    <p class="text-white/60 text-lg leading-relaxed max-w-3xl">Beneath the city, an aging system fails. Every heavy rain, billions of litres of raw or partially treated sewage flow directly into the Red River. It is not an accident—it is infrastructure.</p>
+                </div>
+                <div class="scroll-reveal mb-32">
+                    <div class="relative bg-slate-900/20 rounded p-8 border border-white/5">
+                        <p class="doc-caption text-white/40 mb-6">THE FACTS</p>
+                        <div class="grid md:grid-cols-3 gap-8">
+                            <div>
+                                <p class="stat-number text-white/80 mb-2">~70</p>
+                                <p class="text-white/50 text-sm leading-relaxed">Combined sewer overflow events per year</p>
+                            </div>
+                            <div>
+                                <p class="stat-number text-white/80 mb-2">Billions L</p>
+                                <p class="text-white/50 text-sm leading-relaxed">Of partially treated sewage released annually</p>
+                            </div>
+                            <div>
+                                <p class="stat-number text-white/80 mb-2">100+ yrs</p>
+                                <p class="text-white/50 text-sm leading-relaxed">Age of some sewer infrastructure</p>
+                            </div>
                         </div>
                     </div>
-                </div><!-- Combined Sewer System -->
-                <div class="section-reveal mb-16">
-                    <h2 class="font-display text-2xl mb-6 flex items-center gap-3"><i data-lucide="alert-triangle" class="w-5 h-5 text-red-400"></i> Combined Sewer Overflows</h2>
-                    <div class="bg-river-mid/40 rounded-lg p-8 border border-river-muted/20">
-                        <p class="text-frost-grey leading-relaxed mb-6">Much of Winnipeg's oldest infrastructure uses a <strong class="text-frost-white">combined sewer system</strong> — where rainwater and sewage share the same pipes. During heavy rain or snowmelt, the system overflows, dumping raw or partially treated sewage directly into the Red River.</p><!-- Diagram -->
-                        <svg viewbox="0 0 600 200" class="w-full max-w-lg mx-auto">
-                            <rect width="600" height="200" fill="rgba(10,22,40,0.5)" rx="8" /> <!-- Rain --> <line x1="100" y1="20" x2="100" y2="50" stroke="#4a6d8c" stroke-width="1.5" /> <line x1="120" y1="25" x2="120" y2="55" stroke="#4a6d8c" stroke-width="1.5" /> <line x1="85" y1="30" x2="85" y2="60" stroke="#4a6d8c" stroke-width="1.5" /> <text x="100" y="15" text-anchor="middle" fill="#9cb0c4" font-size="10">
+                </div>
+                <div class="scroll-reveal mb-32">
+                    <h2 class="doc-title text-xl text-white mb-8">Combined Sewer Overflows</h2>
+                    <p class="text-white/60 leading-relaxed mb-8 max-w-3xl">Much of Winnipeg's oldest infrastructure uses a combined sewer system — where rainwater and sewage share the same pipes. During heavy rain or snowmelt, the system overflows, dumping raw or partially treated sewage directly into the Red River.</p>
+                    <div class="relative bg-slate-900/30 rounded h-64 cinematic-image">
+                        <svg class="w-full h-full" preserveaspectratio="xMidYMid slice" viewbox="0 0 800 300">
+                            <!-- Pipes --> <rect x="50" y="100" width="700" height="40" rx="8" fill="#1a2a3a" stroke="#3a4a5a" stroke-width="1" /> <!-- Rain input --> <line x1="200" y1="40" x2="200" y2="100" stroke="#4a7a9a" stroke-width="2" /> <line x1="220" y1="50" x2="220" y2="100" stroke="#4a7a9a" stroke-width="2" /> <line x1="180" y1="55" x2="180" y2="100" stroke="#4a7a9a" stroke-width="2" /> <!-- Sewage input --> <line x1="400" y1="80" x2="400" y2="100" stroke="#6a5a4a" stroke-width="2" stroke-dasharray="4,4" /> <!-- Overflow to river --> <path d="M650,100 L700,40 L720,60" stroke="#ff4444" stroke-width="2" fill="none" /> <!-- River --> <path d="M680,80 Q750,60 800,100" stroke="#4a6a8a" stroke-width="3" fill="none" /> <!-- Labels --> <text x="200" y="25" text-anchor="middle" fill="#4a7a9a" font-size="12" font-family="serif">
                             Rain
-                        </text> <!-- Pipe --> <rect x="60" y="80" width="300" height="30" fill="#2d4a6f" rx="4" /> <text x="210" y="100" text-anchor="middle" fill="#9cb0c4" font-size="9">
-                            Combined Sewer Pipe
-                        </text> <!-- Overflow --> <path d="M360,95 L420,95 L420,150 L500,150" stroke="#ef4444" stroke-width="2" fill="none" marker-end="url(#arrowRed)" /> <text x="460" y="140" text-anchor="middle" fill="#ef4444" font-size="9">
-                            Overflow
-                        </text> <!-- River --> <path d="M470,155 Q530,145 590,160" stroke="#4a6d8c" stroke-width="4" fill="none" /> <text x="530" y="180" text-anchor="middle" fill="#4a6d8c" font-size="10">
-                            Red River
-                        </text> <!-- Home --> <rect x="140" y="55" width="20" height="25" fill="none" stroke="#9cb0c4" stroke-width="1" /> <polygon points="140,55 150,45 160,55" fill="none" stroke="#9cb0c4" stroke-width="1" /> <line x1="150" y1="80" x2="150" y2="95" stroke="#9cb0c4" stroke-width="1" stroke-dasharray="2,2" /> <text x="150" y="130" text-anchor="middle" fill="#9cb0c4" font-size="8">
+                        </text> <text x="400" y="60" text-anchor="middle" fill="#6a5a4a" font-size="12" font-family="serif">
                             Sewage
+                        </text> <text x="720" y="35" text-anchor="middle" fill="#ff4444" font-size="12" font-weight="bold">
+                            OVERFLOW
                         </text>
                         </svg>
                     </div>
-                </div><!-- Timeline -->
-                <div class="section-reveal mb-16">
-                    <h2 class="font-display text-2xl mb-6">Infrastructure Timeline</h2>
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-4">
-                            <div class="w-16 text-right text-earth-sepia text-sm font-semibold shrink-0">
-                                1880s
-                            </div>
-                            <div class="w-3 h-3 rounded-full bg-earth-sepia mt-1.5 shrink-0"></div>
-                            <p class="text-frost-grey text-sm">First combined sewer pipes installed in downtown Winnipeg</p>
+                </div>
+                <div class="scroll-reveal">
+                    <h2 class="doc-title text-xl text-white mb-8">Why This Continues</h2>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="border-l border-white/20 pl-8">
+                            <h3 class="text-white font-display text-lg mb-3">Cost</h3>
+                            <p class="text-white/60 text-sm leading-relaxed">Separating the combined system would cost billions. Infrastructure upgrades compete with other municipal priorities.</p>
                         </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-16 text-right text-earth-sepia text-sm font-semibold shrink-0">
-                                1930s
-                            </div>
-                            <div class="w-3 h-3 rounded-full bg-river-muted mt-1.5 shrink-0"></div>
-                            <p class="text-frost-grey text-sm">System expanded without separating stormwater from sewage</p>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-16 text-right text-earth-sepia text-sm font-semibold shrink-0">
-                                2003
-                            </div>
-                            <div class="w-3 h-3 rounded-full bg-river-muted mt-1.5 shrink-0"></div>
-                            <p class="text-frost-grey text-sm">Province orders Winnipeg to reduce nutrient loading — compliance still pending</p>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-16 text-right text-red-400 text-sm font-semibold shrink-0">
-                                2023
-                            </div>
-                            <div class="w-3 h-3 rounded-full bg-red-400 mt-1.5 shrink-0"></div>
-                            <p class="text-frost-grey text-sm">City continues to discharge billions of litres of wastewater annually</p>
-                        </div>
-                    </div>
-                </div><!-- Why it continues -->
-                <div class="section-reveal">
-                    <h2 class="font-display text-2xl mb-6">Why Does This Continue?</h2>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="stat-card p-6 rounded-lg">
-                            <h4 class="text-frost-white font-semibold mb-2"><i data-lucide="dollar-sign" class="w-4 h-4 inline text-river-muted mr-1"></i>Cost</h4>
-                            <p class="text-frost-grey text-sm">Separating the combined system would cost billions. Infrastructure upgrades compete with other municipal priorities.</p>
-                        </div>
-                        <div class="stat-card p-6 rounded-lg">
-                            <h4 class="text-frost-white font-semibold mb-2"><i data-lucide="clock" class="w-4 h-4 inline text-river-muted mr-1"></i>Scale</h4>
-                            <p class="text-frost-grey text-sm">Hundreds of kilometers of century-old pipes cannot be replaced overnight. The project spans decades.</p>
-                        </div>
-                        <div class="stat-card p-6 rounded-lg">
-                            <h4 class="text-frost-white font-semibold mb-2"><i data-lucide="eye-off" class="w-4 h-4 inline text-river-muted mr-1"></i>Visibility</h4>
-                            <p class="text-frost-grey text-sm">The problem is underground and invisible to most residents, reducing public pressure for change.</p>
-                        </div>
-                        <div class="stat-card p-6 rounded-lg">
-                            <h4 class="text-frost-white font-semibold mb-2"><i data-lucide="building" class="w-4 h-4 inline text-river-muted mr-1"></i>Politics</h4>
-                            <p class="text-frost-grey text-sm">Multi-level government jurisdictions slow decision-making. Accountability is diffused across agencies.</p>
+                        <div class="border-l border-white/20 pl-8">
+                            <h3 class="text-white font-display text-lg mb-3">Invisibility</h3>
+                            <p class="text-white/60 text-sm leading-relaxed">The problem is underground and invisible to most residents, reducing public pressure for change.</p>
                         </div>
                     </div>
                 </div>
@@ -339,64 +394,55 @@
         </section>
     </div><!-- ENVIRONMENT PAGE -->
     <div id="page-environment" class="page">
-        <section class="pt-24 pb-16 px-6" style="min-height:100%">
-            <div class="max-w-5xl mx-auto">
-                <div class="section-reveal text-center mb-16">
-                    <p class="text-green-400/70 uppercase tracking-[0.2em] text-xs mb-4">Chapter Three</p>
-                    <h1 class="font-display text-4xl md:text-5xl mb-4">Environmental Consequences</h1>
-                    <p class="text-frost-grey max-w-2xl mx-auto">From river to lake — the downstream cost of urban neglect.</p>
-                </div><!-- Lake Winnipeg visualization -->
-                <div class="section-reveal mb-16">
-                    <div class="relative bg-river-mid/30 rounded-xl p-8 border border-green-900/30 overflow-hidden">
-                        <div class="absolute top-0 right-0 w-64 h-64 bg-green-600/5 rounded-full blur-3xl"></div>
-                        <h2 class="font-display text-2xl mb-4 relative z-10">Lake Winnipeg: A Lake in Crisis</h2>
-                        <p class="text-frost-grey leading-relaxed relative z-10 mb-6">The Red River delivers its nutrient load to Lake Winnipeg — the 10th largest freshwater lake on Earth. Excess phosphorus and nitrogen fuel massive algae blooms that have transformed the lake into one of the most threatened freshwater ecosystems on the planet.</p>
-                        <svg viewbox="0 0 500 250" class="w-full max-w-md mx-auto relative z-10">
-                            <ellipse cx="250" cy="125" rx="180" ry="100" fill="#1a4a2a" opacity="0.3" stroke="#4a8c5a" stroke-width="1" /> <!-- Algae patches --> <ellipse cx="200" cy="100" rx="50" ry="30" fill="#2d8c3a" opacity="0.4" /> <ellipse cx="300" cy="140" rx="40" ry="25" fill="#3a9c4a" opacity="0.35" /> <ellipse cx="180" cy="150" rx="35" ry="20" fill="#2d8c3a" opacity="0.3" /> <!-- Arrow from river --> <path d="M50,200 Q100,170 130,140" stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="4,4" /> <text x="60" y="220" fill="#ef4444" font-size="9">
-                            Red River Input
-                        </text> <text x="250" y="30" text-anchor="middle" fill="#4a8c5a" font-size="11" font-family="serif">
-                            Lake Winnipeg
-                        </text> <text x="250" y="240" text-anchor="middle" fill="#9cb0c4" font-size="9">
-                            Green areas = algae bloom coverage
-                        </text>
+        <section class="w-full min-h-screen bg-black pt-32 pb-16 px-8 md:px-16">
+            <div class="grain"></div>
+            <div class="max-w-5xl mx-auto relative z-10">
+                <div class="scroll-reveal mb-24">
+                    <p class="doc-caption text-white/40 mb-4">CHAPTER THREE</p>
+                    <h1 class="doc-title text-white mb-8">Environmental<br>
+                        Consequences</h1>
+                    <p class="text-white/60 text-lg leading-relaxed max-w-3xl">From river to lake — the downstream cost of urban neglect. Phosphorus and nitrogen flow north, feeding algae blooms that have transformed Lake Winnipeg into one of the world's most threatened freshwater ecosystems.</p>
+                </div>
+                <div class="scroll-reveal mb-32">
+                    <div class="relative bg-slate-900/30 rounded h-80 cinematic-image">
+                        <svg class="w-full h-full" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 600">
+                            <defs>
+                                <radialgradient id="lakeGrad">
+                                    <stop offset="0%" style="stop-color:#1a4a4a" />
+                                    <stop offset="100%" style="stop-color:#0a2a3a" />
+                                </radialgradient>
+                            </defs> <ellipse cx="500" cy="300" rx="450" ry="250" fill="url(#lakeGrad)" /> <!-- Algae patches --> <ellipse cx="300" cy="250" rx="100" ry="60" fill="#2a7a3a" opacity="0.4" /> <ellipse cx="650" cy="320" rx="120" ry="70" fill="#3a8a4a" opacity="0.35" /> <ellipse cx="200" cy="380" rx="80" ry="50" fill="#2a7a3a" opacity="0.3" />
                         </svg>
+                        <p class="absolute bottom-4 left-6 text-xs text-white/40 font-mono opacity-60">Lake Winnipeg — green zones indicate algae bloom coverage</p>
                     </div>
-                </div><!-- Key issues -->
-                <div class="section-reveal grid md:grid-cols-2 gap-8 mb-16">
-                    <div>
-                        <h3 class="font-display text-xl mb-4 text-green-300/80"><i data-lucide="flask-conical" class="w-5 h-5 inline mr-2"></i>Phosphorus Pollution</h3>
-                        <p class="text-frost-grey leading-relaxed text-sm">Phosphorus from wastewater, agricultural runoff, and detergents enters the Red River. Even small concentrations accelerate plant and algae growth, depleting oxygen and suffocating aquatic life. Winnipeg's wastewater treatment plants remain a significant point source.</p>
+                </div>
+                <div class="scroll-reveal mb-32">
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h2 class="doc-subtitle text-white mb-4">Phosphorus<br>
+                                Pollution</h2>
+                            <p class="text-white/60 text-sm leading-relaxed">Even small concentrations accelerate plant and algae growth, depleting oxygen and suffocating aquatic life. Winnipeg's wastewater treatment plants remain a significant point source.</p>
+                        </div>
+                        <div>
+                            <h2 class="doc-subtitle text-white mb-4">Eutrophication</h2>
+                            <p class="text-white/60 text-sm leading-relaxed">Excessive nutrient enrichment transforms clear waters into murky, oxygen-depleted zones. Fish kills, toxic blooms, and collapsed food webs follow. Lake Winnipeg now experiences some of the worst blooms globally.</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="font-display text-xl mb-4 text-green-300/80"><i data-lucide="waves" class="w-5 h-5 inline mr-2"></i>Eutrophication</h3>
-                        <p class="text-frost-grey leading-relaxed text-sm">The process of eutrophication — excessive nutrient enrichment — transforms clear waters into murky, oxygen-depleted zones. Fish kills, toxic cyanobacteria blooms, and collapsed food webs follow. Lake Winnipeg now experiences some of the worst blooms globally.</p>
-                    </div>
-                    <div>
-                        <h3 class="font-display text-xl mb-4 text-green-300/80"><i data-lucide="fish" class="w-5 h-5 inline mr-2"></i>Ecosystem Damage</h3>
-                        <p class="text-frost-grey leading-relaxed text-sm">Native fish species, wetland habitats, and water quality for surrounding communities are all affected. The commercial fishing industry on Lake Winnipeg — a major employer for Indigenous communities — faces increasing uncertainty.</p>
-                    </div>
-                    <div>
-                        <h3 class="font-display text-xl mb-4 text-green-300/80"><i data-lucide="thermometer" class="w-5 h-5 inline mr-2"></i>Climate Acceleration</h3>
-                        <p class="text-frost-grey leading-relaxed text-sm">Warming temperatures extend the growing season for algae and intensify storm events that trigger combined sewer overflows. Climate change and infrastructure failure compound each other in a worsening feedback loop.</p>
-                    </div>
-                </div><!-- Reflective conclusion -->
-                <div class="section-reveal">
-                    <div class="border-l-2 border-earth-sepia/50 pl-8 py-4 max-w-3xl mx-auto">
-                        <h2 class="font-display text-2xl md:text-3xl italic mb-6 text-earth-paper">"We do not inherit the river from our ancestors — we borrow it from our children."</h2>
-                        <p class="text-frost-grey leading-relaxed mb-6">The Red River is more than infrastructure. It is memory, identity, and responsibility. For six thousand years, peoples have gathered at these waters. What we choose to pour into them reflects not just our engineering, but our values.</p>
-                        <p class="text-frost-grey leading-relaxed mb-6">Canadian identity has long been tied to the Northern wilderness — to rivers, lakes, and forests. But identity without stewardship is mythology. The Red River asks us whether we will live up to the story we tell about ourselves, or let it flow downstream, out of sight and out of mind.</p>
-                        <p class="text-earth-sepia text-sm italic">The choice belongs to this generation. The consequences belong to all who come after.</p>
-                    </div>
+                </div>
+                <hr class="border-white/10 my-16">
+                <div class="scroll-reveal">
+                    <p class="text-white/70 text-2xl font-display italic leading-relaxed mb-8 max-w-3xl">"We do not inherit the river from our ancestors — we borrow it from our children."</p>
+                    <p class="text-white/60 leading-relaxed mb-6 max-w-3xl">The Red River is more than infrastructure. It is memory, identity, and responsibility. For six thousand years, peoples have gathered at these waters. What we choose to pour into them reflects not just our engineering, but our values.</p>
+                    <p class="text-white/50 text-sm leading-relaxed max-w-3xl">The choice belongs to this generation. The consequences belong to all who come after.</p>
                 </div>
             </div>
         </section>
     </div><!-- Footer -->
-    <footer class="w-full py-8 px-6 border-t border-river-mid/30 text-center">
-        <p class="text-frost-grey/50 text-xs">A documentary web experience about the Red River, Winnipeg, Canada</p>
+    <footer class="w-full py-12 px-8 border-t border-white/5 text-center bg-black">
+        <p class="text-white/30 text-xs font-mono">A documentary web experience about the Red River, Winnipeg, Canada</p>
     </footer>
 </div>
 <script>
-    // Navigation
     let currentPage = 'home';
 
     function navigateTo(page) {
@@ -406,13 +452,13 @@
 
         document.querySelectorAll('.nav-link').forEach(l => {
             l.classList.remove('active-link');
-            l.classList.remove('text-stone-100');
-            l.classList.add('text-stone-400');
+            l.classList.remove('text-white/90');
+            l.classList.add('text-white/40');
         });
         const activeLink = document.querySelector(`[data-page="${page}"]`);
         if (activeLink) {
-            activeLink.classList.add('active-link', 'text-stone-100');
-            activeLink.classList.remove('text-stone-400');
+            activeLink.classList.add('active-link', 'text-white/90');
+            activeLink.classList.remove('text-white/40');
         }
 
         document.getElementById('app-wrapper').scrollTo({ top: 0, behavior: 'smooth' });
@@ -423,14 +469,28 @@
         document.getElementById('mobile-menu').classList.toggle('hidden');
     }
 
-    // Scroll reveal
     function observeSections() {
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.1, root: document.getElementById('app-wrapper') });
-        document.querySelectorAll('.section-reveal').forEach(el => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('visible');
+            });
+        }, {
+            threshold: 0.1,
+            root: null  // 用viewport作为root
+        });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
             el.classList.remove('visible');
             observer.observe(el);
+        });
+
+        requestAnimationFrame(() => {
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    el.classList.add('visible');
+                }
+            });
         });
     }
 
@@ -439,8 +499,8 @@
     const nav = document.getElementById('main-nav');
     appWrapper.addEventListener('scroll', () => {
         if (appWrapper.scrollTop > 50) {
-            nav.style.background = 'rgba(15,15,15,0.95)';
-            nav.style.backdropFilter = 'blur(10px)';
+            nav.style.background = 'rgba(0,0,0,0.7)';
+            nav.style.backdropFilter = 'blur(8px)';
         } else {
             nav.style.background = 'transparent';
             nav.style.backdropFilter = 'none';
@@ -450,45 +510,22 @@
     // Element SDK
     const defaultConfig = {
         site_title: 'The Red River',
-        hero_subtitle: 'The river that built Winnipeg — and the river now threatened by it.',
-        background_color: '#0f0f0f',
-        surface_color: '#1a1a1a',
-        text_color: '#f5f5f4',
-        accent_color: '#9ca3af',
-        secondary_action_color: '#6b7280',
-        font_family: 'Playfair Display',
-        font_size: 16
+        hero_subtitle: 'The river that built Winnipeg — and the river now threatened by it.'
     };
 
     function applyConfig(config) {
-        const title = config.site_title || defaultConfig.site_title;
-        const sub = config.hero_subtitle || defaultConfig.hero_subtitle;
-        const text = config.text_color || defaultConfig.text_color;
-        const font = config.font_family || defaultConfig.font_family;
-        const size = config.font_size || defaultConfig.font_size;
-
-        document.getElementById('hero-title').textContent = title;
-        document.getElementById('hero-sub').textContent = sub;
-
-        document.querySelectorAll('.font-display').forEach(el => el.style.fontFamily = font + ', serif');
-        document.body.style.fontSize = size + 'px';
-        document.body.style.color = text;
+        document.getElementById('hero-title').textContent = config.site_title || defaultConfig.site_title;
+        document.getElementById('hero-sub').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
     }
 
     window.elementSdk.init({
         defaultConfig,
         onConfigChange: async (config) => applyConfig(config),
         mapToCapabilities: (config) => ({
-            recolorables: [
-                { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
-                { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
-                { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
-                { get: () => config.accent_color || defaultConfig.accent_color, set: (v) => { config.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } },
-                { get: () => config.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } }
-            ],
+            recolorables: [],
             borderables: [],
-            fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
-            fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+            fontEditable: undefined,
+            fontSizeable: undefined
         }),
         mapToEditPanelValues: (config) => new Map([
             ['site_title', config.site_title || defaultConfig.site_title],
@@ -496,9 +533,8 @@
         ])
     });
 
-    // Init
     lucide.createIcons();
-    observeSections();
+    setTimeout(observeSections, 200);
 </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a02a11a9df156e28',t:'MTc3OTkzNzg1NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a02d8a435a0e1648',t:'MTc3OTk3NDI1Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
