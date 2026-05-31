@@ -154,28 +154,36 @@
                     </div>
                 </div>
             </div><!-- RIGHT SIDE: CINEMATIC IMAGE -->
-            <div class="hidden md:block absolute inset-0 w-1/2 right-0 z-10 cinematic-image">
-                <!-- Atmospheric layers -->
-                <div class="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-950/40 to-black/60"></div>
-                <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-transparent to-transparent"></div><!-- Water/river visualization -->
-                <svg class="absolute inset-0 w-full h-full" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 800">
+            <!-- LEFT SIDE: SVG BACKGROUND -->
+            <div class="hidden md:block absolute top-0 left-0 bottom-0 w-1/2 z-5">
+                <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1000 800">
                     <defs>
-                        <lineargradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" style="stop-color:#1a2a3a;stop-opacity:0.9" />
                             <stop offset="40%" style="stop-color:#0f1a2a;stop-opacity:0.95" />
                             <stop offset="100%" style="stop-color:#050808;stop-opacity:1" />
-                        </lineargradient>
-                        <radialgradient id="fogGrad" cx="50%" cy="15%">
+                        </linearGradient>
+                        <radialGradient id="fogGrad" cx="50%" cy="15%">
                             <stop offset="0%" style="stop-color:#3a5a7a;stop-opacity:0.25" />
                             <stop offset="100%" style="stop-color:#0d0d0d;stop-opacity:0" />
-                        </radialgradient>
-                    </defs> <!-- Water base --> <rect width="1000" height="800" fill="url(#waterGrad)" /> <!-- Undulating water surface --> <path d="M0,320 Q125,280 250,320 T500,320 T750,320 T1000,320 L1000,800 L0,800 Z" fill="#0a1520" opacity="0.5" /> <path d="M0,400 Q125,360 250,400 T500,400 T750,400 T1000,400 L1000,800 L0,800 Z" fill="#050a10" opacity="0.4" /> <!-- Atmospheric fog --> <circle cx="500" cy="180" r="380" fill="url(#fogGrad)" opacity="0.7" /> <!-- Distant reflections --> <circle cx="250" cy="240" r="70" fill="#4a6a8a" opacity="0.12" /> <circle cx="750" cy="270" r="90" fill="#3a5a7a" opacity="0.1" /> <!-- Documentary typeface --> <text x="80" y="750" font-family="'Courier Prime', monospace" font-size="11" fill="#7a8a96" opacity="0.5" letter-spacing="3">
-                    THE RED RIVER, WINTER
-                </text> <text x="80" y="770" font-family="'Courier Prime', monospace" font-size="10" fill="#5a6a76" opacity="0.35" letter-spacing="2">
-                    Confluence of two systems
-                </text>
-                </svg><!-- Dark vignette -->
-                <div class="absolute inset-0 bg-radial-gradient from-transparent to-black/50"></div>
+                        </radialGradient>
+                    </defs>
+                    <rect width="1000" height="800" fill="url(#waterGrad)" />
+                    <path d="M0,320 Q125,280 250,320 T500,320 T750,320 T1000,320 L1000,800 L0,800 Z" fill="#0a1520" opacity="0.5" />
+                    <path d="M0,400 Q125,360 250,400 T500,400 T750,400 T1000,400 L1000,800 L0,800 Z" fill="#050a10" opacity="0.4" />
+                    <circle cx="500" cy="180" r="380" fill="url(#fogGrad)" opacity="0.7" />
+                    <circle cx="250" cy="240" r="70" fill="#4a6a8a" opacity="0.12" />
+                    <circle cx="750" cy="270" r="90" fill="#3a5a7a" opacity="0.1" />
+                    <text x="80" y="750" font-family="'Courier Prime', monospace" font-size="11" fill="#7a8a96" opacity="0.5" letter-spacing="3">THE RED RIVER, WINNIPEG</text>
+                    <text x="80" y="770" font-family="'Courier Prime', monospace" font-size="10" fill="#5a6a76" opacity="0.35" letter-spacing="2">Confluence of two systems</text>
+                </svg>
+            </div>
+
+            <!-- RIGHT SIDE: PHOTO -->
+            <div class="hidden md:block absolute top-0 right-0 bottom-0 w-1/2 z-10 cinematic-image">
+                <img src="img.png" alt="The Red River"
+                     class="absolute inset-0 w-full h-full object-cover object-[80%]">
+                <div class="absolute inset-0 bg-black/20"></div>
             </div><!-- Vertical dividing line (desktop) -->
             <div class="hidden md:block absolute inset-y-0 left-1/2 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent z-30"></div>
         </section>
