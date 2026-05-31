@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Red River — Wastewater</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Background -->
+<div style="position:fixed; inset:0; z-index:-1; background: linear-gradient(180deg, #1a2a3a 0%, #0f1a2a 40%, #050808 100%);"></div>
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-700" id="main-nav" style="background: transparent;">
+    <div class="px-6 md:px-12 py-6 flex items-center justify-between">
+        <div class="font-display text-lg tracking-widest cursor-pointer text-white/60 hover:text-white/100 transition-colors" onclick="navigateTo('home')">
+            RED RIVER
+        </div>
+        <div class="hidden md:flex items-center gap-12 text-xs tracking-widest">
+            <a class="nav-link text-white/40 cursor-pointer" data-page="home"        onclick="navigateTo('home')">HOME</a>
+            <a class="nav-link text-white/40 cursor-pointer" data-page="history"     onclick="navigateTo('history')">HISTORY</a>
+            <a class="nav-link text-white/40 cursor-pointer" data-page="wastewater"  onclick="navigateTo('wastewater')">WASTEWATER</a>
+            <a class="nav-link text-white/40 cursor-pointer" data-page="environment" onclick="navigateTo('environment')">ENVIRONMENT</a>
+        </div>
+        <button class="md:hidden text-white/70" onclick="toggleMobile()">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-black/90 backdrop-blur px-6 py-6 space-y-4 border-t border-white/5">
+        <a class="block text-white/90 cursor-pointer tracking-widest text-xs" onclick="navigateTo('home'); toggleMobile()">HOME</a>
+        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('history'); toggleMobile()">HISTORY</a>
+        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('wastewater'); toggleMobile()">WASTEWATER</a>
+        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('environment'); toggleMobile()">ENVIRONMENT</a>
+    </div>
+</nav>
+
+<!-- WASTEWATER -->
+<section class="w-full min-h-screen bg-black pt-32 pb-16 px-8 md:px-16">
+    <div class="grain"></div>
+    <div class="max-w-5xl mx-auto relative z-10">
+
+        <!-- Header -->
+        <div class="scroll-reveal mb-24">
+            <p class="doc-caption text-white/40 mb-4">CHAPTER TWO</p>
+            <h1 class="doc-title text-white mb-8">Wastewater &amp;<br>Modern Winnipeg</h1>
+            <p class="text-white/60 text-lg leading-relaxed max-w-3xl">Beneath the city, an aging system fails. Every heavy rain, billions of litres of raw or partially treated sewage flow directly into the Red River. It is not an accident — it is infrastructure.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="scroll-reveal mb-32">
+            <div class="relative bg-slate-900/20 rounded p-8 border border-white/5">
+                <p class="doc-caption text-white/40 mb-6">THE FACTS</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <p class="stat-number text-white/80 mb-2">~70</p>
+                        <p class="text-white/50 text-sm leading-relaxed">Combined sewer overflow events per year</p>
+                    </div>
+                    <div>
+                        <p class="stat-number text-white/80 mb-2">Billions L</p>
+                        <p class="text-white/50 text-sm leading-relaxed">Of partially treated sewage released annually</p>
+                    </div>
+                    <div>
+                        <p class="stat-number text-white/80 mb-2">100+ yrs</p>
+                        <p class="text-white/50 text-sm leading-relaxed">Age of some sewer infrastructure</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CSO Diagram -->
+        <div class="scroll-reveal mb-32">
+            <h2 class="doc-title text-xl text-white mb-8">Combined Sewer Overflows</h2>
+            <p class="text-white/60 leading-relaxed mb-8 max-w-3xl">Much of Winnipeg's oldest infrastructure uses a combined sewer system — where rainwater and sewage share the same pipes. During heavy rain or snowmelt, the system overflows, dumping raw or partially treated sewage directly into the Red River.</p>
+            <div class="relative bg-slate-900/30 rounded h-64 cinematic-image">
+                <svg class="w-full h-full" preserveAspectRatio="xMidYMid slice" viewBox="0 0 800 300">
+                    <!-- Pipe -->
+                    <rect x="50" y="100" width="700" height="40" rx="8" fill="#1a2a3a" stroke="#3a4a5a" stroke-width="1"/>
+                    <!-- Rain input -->
+                    <line x1="200" y1="40"  x2="200" y2="100" stroke="#4a7a9a" stroke-width="2"/>
+                    <line x1="220" y1="50"  x2="220" y2="100" stroke="#4a7a9a" stroke-width="2"/>
+                    <line x1="180" y1="55"  x2="180" y2="100" stroke="#4a7a9a" stroke-width="2"/>
+                    <!-- Sewage input -->
+                    <line x1="400" y1="80"  x2="400" y2="100" stroke="#6a5a4a" stroke-width="2" stroke-dasharray="4,4"/>
+                    <!-- Overflow -->
+                    <path d="M650,100 L700,40 L720,60" stroke="#ff4444" stroke-width="2" fill="none"/>
+                    <!-- River -->
+                    <path d="M680,80 Q750,60 800,100" stroke="#4a6a8a" stroke-width="3" fill="none"/>
+                    <!-- Labels -->
+                    <text x="200" y="25"  text-anchor="middle" fill="#4a7a9a" font-size="12" font-family="serif">Rain</text>
+                    <text x="400" y="60"  text-anchor="middle" fill="#6a5a4a" font-size="12" font-family="serif">Sewage</text>
+                    <text x="720" y="35"  text-anchor="middle" fill="#ff4444" font-size="12" font-weight="bold">OVERFLOW</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Why this continues -->
+        <div class="scroll-reveal">
+            <h2 class="doc-title text-xl text-white mb-8">Why This Continues</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="border-l border-white/20 pl-8">
+                    <h3 class="text-white font-display text-lg mb-3">Cost</h3>
+                    <p class="text-white/60 text-sm leading-relaxed">Separating the combined system would cost billions. Infrastructure upgrades compete with other municipal priorities.</p>
+                </div>
+                <div class="border-l border-white/20 pl-8">
+                    <h3 class="text-white font-display text-lg mb-3">Invisibility</h3>
+                    <p class="text-white/60 text-sm leading-relaxed">The problem is underground and invisible to most residents, reducing public pressure for change.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="w-full py-12 px-8 border-t border-white/5 text-center bg-black">
+    <p class="text-white/30 text-xs font-mono">A documentary web experience about the Red River, Winnipeg, Canada</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

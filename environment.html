@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Red River — Environment</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Background -->
+<div style="position:fixed; inset:0; z-index:-1; background: linear-gradient(180deg, #1a2a3a 0%, #0f1a2a 40%, #050808 100%);"></div>
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-700" id="main-nav" style="background: transparent;">
+    <div class="px-6 md:px-12 py-6 flex items-center justify-between">
+        <div class="font-display text-lg tracking-widest cursor-pointer text-white/60 hover:text-white/100 transition-colors" onclick="navigateTo('home')">
+            RED RIVER
+        </div>
+        <div class="hidden md:flex items-center gap-12 text-xs tracking-widest">
+            <a class="nav-link text-white/40 cursor-pointer" data-page="home"        onclick="navigateTo('home')">HOME</a>
+            <a class="nav-link text-white/40 cursor-pointer" data-page="history"     onclick="navigateTo('history')">HISTORY</a>
+            <a class="nav-link text-white/40 cursor-pointer" data-page="wastewater"  onclick="navigateTo('wastewater')">WASTEWATER</a>
+            <a class="nav-link text-white/40 cursor-pointer" data-page="environment" onclick="navigateTo('environment')">ENVIRONMENT</a>
+        </div>
+        <button class="md:hidden text-white/70" onclick="toggleMobile()">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-black/90 backdrop-blur px-6 py-6 space-y-4 border-t border-white/5">
+        <a class="block text-white/90 cursor-pointer tracking-widest text-xs" onclick="navigateTo('home'); toggleMobile()">HOME</a>
+        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('history'); toggleMobile()">HISTORY</a>
+        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('wastewater'); toggleMobile()">WASTEWATER</a>
+        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('environment'); toggleMobile()">ENVIRONMENT</a>
+    </div>
+</nav>
+
+<!-- ENVIRONMENT -->
+<section class="w-full min-h-screen bg-black pt-32 pb-16 px-8 md:px-16">
+    <div class="grain"></div>
+    <div class="max-w-5xl mx-auto relative z-10">
+
+        <!-- Header -->
+        <div class="scroll-reveal mb-24">
+            <p class="doc-caption text-white/40 mb-4">CHAPTER THREE</p>
+            <h1 class="doc-title text-white mb-8">Environmental<br>Consequences</h1>
+            <p class="text-white/60 text-lg leading-relaxed max-w-3xl">From river to lake — the downstream cost of urban neglect. Phosphorus and nitrogen flow north, feeding algae blooms that have transformed Lake Winnipeg into one of the world's most threatened freshwater ecosystems.</p>
+        </div>
+
+        <!-- Lake Winnipeg diagram -->
+        <div class="scroll-reveal mb-32">
+            <div class="relative bg-slate-900/30 rounded h-80 cinematic-image">
+                <svg class="w-full h-full" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1000 600">
+                    <defs>
+                        <radialGradient id="lakeGrad">
+                            <stop offset="0%"   style="stop-color:#1a4a4a"/>
+                            <stop offset="100%" style="stop-color:#0a2a3a"/>
+                        </radialGradient>
+                    </defs>
+                    <ellipse cx="500" cy="300" rx="450" ry="250" fill="url(#lakeGrad)"/>
+                    <ellipse cx="300" cy="250" rx="100" ry="60"  fill="#2a7a3a" opacity="0.4"/>
+                    <ellipse cx="650" cy="320" rx="120" ry="70"  fill="#3a8a4a" opacity="0.35"/>
+                    <ellipse cx="200" cy="380" rx="80"  ry="50"  fill="#2a7a3a" opacity="0.3"/>
+                </svg>
+                <p class="absolute bottom-4 left-6 text-xs text-white/40 font-mono opacity-60">Lake Winnipeg — green zones indicate algae bloom coverage</p>
+            </div>
+        </div>
+
+        <!-- Two-column science -->
+        <div class="scroll-reveal mb-32">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="doc-subtitle text-white mb-4">Phosphorus<br>Pollution</h2>
+                    <p class="text-white/60 text-sm leading-relaxed">Even small concentrations accelerate plant and algae growth, depleting oxygen and suffocating aquatic life. Winnipeg's wastewater treatment plants remain a significant point source.</p>
+                </div>
+                <div>
+                    <h2 class="doc-subtitle text-white mb-4">Eutrophication</h2>
+                    <p class="text-white/60 text-sm leading-relaxed">Excessive nutrient enrichment transforms clear waters into murky, oxygen-depleted zones. Fish kills, toxic blooms, and collapsed food webs follow. Lake Winnipeg now experiences some of the worst blooms globally.</p>
+                </div>
+            </div>
+        </div>
+
+        <hr class="border-white/10 my-16">
+
+        <!-- Closing statement -->
+        <div class="scroll-reveal">
+            <p class="text-white/70 text-2xl font-display italic leading-relaxed mb-8 max-w-3xl">"We do not inherit the river from our ancestors — we borrow it from our children."</p>
+            <p class="text-white/60 leading-relaxed mb-6 max-w-3xl">The Red River is more than infrastructure. It is memory, identity, and responsibility. For six thousand years, peoples have gathered at these waters. What we choose to pour into them reflects not just our engineering, but our values.</p>
+            <p class="text-white/50 text-sm leading-relaxed max-w-3xl">The choice belongs to this generation. The consequences belong to all who come after.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="w-full py-12 px-8 border-t border-white/5 text-center bg-black">
+    <p class="text-white/30 text-xs font-mono">A documentary web experience about the Red River, Winnipeg, Canada</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

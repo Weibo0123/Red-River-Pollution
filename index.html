@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Red River</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Background -->
+<div style="position:fixed; inset:0; z-index:-1; background: linear-gradient(180deg, #1a2a3a 0%, #0f1a2a 40%, #050808 100%);"></div>
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-700" id="main-nav" style="background: transparent;">
+    <div class="px-6 md:px-12 py-6 flex items-center justify-between">
+        <div class="font-display text-lg tracking-widest cursor-pointer text-white/60 hover:text-white/100 transition-colors" onclick="navigateTo('home')">
+            RED RIVER
+        </div>
+        <div class="hidden md:flex items-center gap-12 text-xs tracking-widest">
+            <a class="nav-link text-white/40 cursor-pointer" data-page="home"        onclick="navigateTo('home')">HOME</a>
+            <a class="nav-link text-white/40 cursor-pointer" data-page="history"     onclick="navigateTo('history')">HISTORY</a>
+            <a class="nav-link text-white/40 cursor-pointer" data-page="wastewater"  onclick="navigateTo('wastewater')">WASTEWATER</a>
+            <a class="nav-link text-white/40 cursor-pointer" data-page="environment" onclick="navigateTo('environment')">ENVIRONMENT</a>
+        </div>
+        <button class="md:hidden text-white/70" onclick="toggleMobile()">
+            <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-black/90 backdrop-blur px-6 py-6 space-y-4 border-t border-white/5">
+        <a class="block text-white/90 cursor-pointer tracking-widest text-xs" onclick="navigateTo('home'); toggleMobile()">HOME</a>
+        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('history'); toggleMobile()">HISTORY</a>
+        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('wastewater'); toggleMobile()">WASTEWATER</a>
+        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('environment'); toggleMobile()">ENVIRONMENT</a>
+    </div>
+</nav>
+
+<!-- HOME: Cinematic Split -->
+<section class="relative w-full min-h-screen bg-black">
+    <div class="grain"></div>
+
+    <!-- Left text -->
+    <div class="relative z-20 flex min-h-screen flex-col justify-center px-8 md:px-16 lg:px-20 py-24 w-full md:w-1/2">
+        <div class="max-w-lg">
+            <div class="scroll-reveal" style="animation-delay: 0.3s;">
+                <h1 class="doc-title text-white mb-12 leading-tight">The Red<br>River</h1>
+            </div>
+            <div class="scroll-reveal" style="animation-delay: 0.6s;">
+                <p class="doc-subtitle text-white/70 mb-12 leading-relaxed">The river that built Winnipeg — and the river now threatened by it.</p>
+            </div>
+            <div class="scroll-reveal space-y-8" style="animation-delay: 0.9s;">
+                <p class="text-white/50 text-sm leading-relaxed max-w-md font-light">For thousands of years, people gathered around these waters. Today, billions of litres of wastewater flow through the same river system.</p>
+                <button onclick="navigateTo('history')" class="group text-white/80 text-xs tracking-widest hover:text-white transition-colors duration-500 flex items-center gap-4">
+                    <span>ENTER THE STORY</span>
+                    <span class="w-8 h-px bg-white/20 group-hover:bg-white/40 transition-all"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Left SVG background -->
+    <div class="hidden md:block absolute top-0 left-0 bottom-0 w-1/2 z-5">
+        <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1000 800">
+            <defs>
+                <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%"   style="stop-color:#1a2a3a;stop-opacity:0.9"/>
+                    <stop offset="40%"  style="stop-color:#0f1a2a;stop-opacity:0.95"/>
+                    <stop offset="100%" style="stop-color:#050808;stop-opacity:1"/>
+                </linearGradient>
+                <radialGradient id="fogGrad" cx="50%" cy="15%">
+                    <stop offset="0%"   style="stop-color:#3a5a7a;stop-opacity:0.25"/>
+                    <stop offset="100%" style="stop-color:#0d0d0d;stop-opacity:0"/>
+                </radialGradient>
+            </defs>
+            <rect width="1000" height="800" fill="url(#waterGrad)"/>
+            <path d="M0,320 Q125,280 250,320 T500,320 T750,320 T1000,320 L1000,800 L0,800 Z" fill="#0a1520" opacity="0.5"/>
+            <path d="M0,400 Q125,360 250,400 T500,400 T750,400 T1000,400 L1000,800 L0,800 Z" fill="#050a10" opacity="0.4"/>
+            <circle cx="500" cy="180" r="380" fill="url(#fogGrad)" opacity="0.7"/>
+            <circle cx="250" cy="240" r="70"  fill="#4a6a8a" opacity="0.12"/>
+            <circle cx="750" cy="270" r="90"  fill="#3a5a7a" opacity="0.1"/>
+            <text x="80" y="750" font-family="'Courier Prime', monospace" font-size="11" fill="#7a8a96" opacity="0.5" letter-spacing="3">THE RED RIVER, WINNIPEG</text>
+            <text x="80" y="770" font-family="'Courier Prime', monospace" font-size="10" fill="#5a6a76" opacity="0.35" letter-spacing="2">Confluence of two systems</text>
+        </svg>
+    </div>
+
+    <!-- Right photo -->
+    <div class="hidden md:block absolute top-0 right-0 bottom-0 w-1/2 z-10 cinematic-image">
+        <img src="img/img.png" alt="The Red River" class="absolute inset-0 w-full h-full object-cover object-[80%]">
+        <div class="absolute inset-0 bg-black/20"></div>
+    </div>
+
+    <!-- Divider -->
+    <div class="hidden md:block absolute inset-y-0 left-1/2 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent z-30"></div>
+</section>
+
+<!-- Footer -->
+<footer class="w-full py-12 px-8 border-t border-white/5 text-center bg-black">
+    <p class="text-white/30 text-xs font-mono">A documentary web experience about the Red River, Winnipeg, Canada</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
