@@ -10,9 +10,6 @@
 </head>
 <body>
 
-<!-- Background -->
-<div style="position:fixed; inset:0; z-index:-1; background: linear-gradient(180deg, #1a2a3a 0%, #0f1a2a 40%, #050808 100%);"></div>
-
 <!-- Navigation -->
 <nav class="fixed top-0 left-0 w-full z-50 transition-all duration-700" id="main-nav" style="background: transparent;">
     <div class="px-6 md:px-12 py-6 flex items-center justify-between">
@@ -38,7 +35,7 @@
 </nav>
 
 <!-- WASTEWATER -->
-<section class="w-full min-h-screen bg-black pt-32 pb-16 px-8 md:px-16">
+<section class="w-full min-h-screen pt-32 pb-16 px-8 md:px-16">
     <div class="grain"></div>
     <div class="max-w-5xl mx-auto relative z-10">
 
@@ -55,16 +52,16 @@
                 <p class="doc-caption text-white/40 mb-6">THE FACTS</p>
                 <div class="grid md:grid-cols-3 gap-8">
                     <div>
-                        <p class="stat-number text-white/80 mb-2">~70</p>
-                        <p class="text-white/50 text-sm leading-relaxed">Combined sewer overflow events per year</p>
+                        <p class="stat-number text-white/80 mb-2">76</p>
+                        <p class="text-white/50 text-sm leading-relaxed">Combined sewer outfall points discharging to Winnipeg's rivers</p>
+                    </div>
+                    <div>
+                        <p class="stat-number text-white/80 mb-2">~22</p>
+                        <p class="text-white/50 text-sm leading-relaxed">Average overflow events per outfall each year</p>
                     </div>
                     <div>
                         <p class="stat-number text-white/80 mb-2">Billions L</p>
                         <p class="text-white/50 text-sm leading-relaxed">Of partially treated sewage released annually</p>
-                    </div>
-                    <div>
-                        <p class="stat-number text-white/80 mb-2">100+ yrs</p>
-                        <p class="text-white/50 text-sm leading-relaxed">Age of some sewer infrastructure</p>
                     </div>
                 </div>
             </div>
@@ -74,25 +71,66 @@
         <div class="scroll-reveal mb-32">
             <h2 class="doc-title text-xl text-white mb-8">Combined Sewer Overflows</h2>
             <p class="text-white/60 leading-relaxed mb-8 max-w-3xl">Much of Winnipeg's oldest infrastructure uses a combined sewer system — where rainwater and sewage share the same pipes. During heavy rain or snowmelt, the system overflows, dumping raw or partially treated sewage directly into the Red River.</p>
-            <div class="relative bg-slate-900/30 rounded h-64 cinematic-image">
-                <svg class="w-full h-full" preserveAspectRatio="xMidYMid slice" viewBox="0 0 800 300">
-                    <!-- Pipe -->
-                    <rect x="50" y="100" width="700" height="40" rx="8" fill="#1a2a3a" stroke="#3a4a5a" stroke-width="1"/>
-                    <!-- Rain input -->
-                    <line x1="200" y1="40"  x2="200" y2="100" stroke="#4a7a9a" stroke-width="2"/>
-                    <line x1="220" y1="50"  x2="220" y2="100" stroke="#4a7a9a" stroke-width="2"/>
-                    <line x1="180" y1="55"  x2="180" y2="100" stroke="#4a7a9a" stroke-width="2"/>
-                    <!-- Sewage input -->
-                    <line x1="400" y1="80"  x2="400" y2="100" stroke="#6a5a4a" stroke-width="2" stroke-dasharray="4,4"/>
-                    <!-- Overflow -->
-                    <path d="M650,100 L700,40 L720,60" stroke="#ff4444" stroke-width="2" fill="none"/>
-                    <!-- River -->
-                    <path d="M680,80 Q750,60 800,100" stroke="#4a6a8a" stroke-width="3" fill="none"/>
-                    <!-- Labels -->
-                    <text x="200" y="25"  text-anchor="middle" fill="#4a7a9a" font-size="12" font-family="serif">Rain</text>
-                    <text x="400" y="60"  text-anchor="middle" fill="#6a5a4a" font-size="12" font-family="serif">Sewage</text>
-                    <text x="720" y="35"  text-anchor="middle" fill="#ff4444" font-size="12" font-weight="bold">OVERFLOW</text>
+            <div class="relative bg-slate-900/30 rounded h-70 cinematic-image">
+                <svg viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                    <defs>
+                        <marker id="arr" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                            <path d="M1,1 L7,4 L1,7 Z" fill="#64748b"/>
+                        </marker>
+                        <marker id="arr-red" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                            <path d="M1,1 L7,4 L1,7 Z" fill="#E24B4A"/>
+                        </marker>
+                    </defs>
+                    <line x1="40" y1="130" x2="760" y2="130" stroke="#334155" stroke-width="0.5" stroke-dasharray="4,4"/>
+                    <text x="48" y="124" font-family="'Courier Prime', monospace" font-size="10" fill="#475569">GROUND LEVEL</text>
+                    <g opacity="0.85">
+                        <line x1="160" y1="30" x2="155" y2="60" stroke="#7dd3fc" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="180" y1="20" x2="175" y2="52" stroke="#7dd3fc" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="200" y1="28" x2="195" y2="58" stroke="#7dd3fc" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="220" y1="18" x2="215" y2="50" stroke="#7dd3fc" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="240" y1="32" x2="235" y2="62" stroke="#7dd3fc" stroke-width="1.5" stroke-linecap="round"/>
+                        <line x1="170" y1="55" x2="165" y2="85" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round"/>
+                        <line x1="195" y1="50" x2="190" y2="80" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round"/>
+                        <line x1="225" y1="48" x2="220" y2="78" stroke="#7dd3fc" stroke-width="1.2" stroke-linecap="round"/>
+                    </g>
+                    <text x="200" y="15" text-anchor="middle" font-family="'Courier Prime', monospace" font-size="10" letter-spacing="0.1em" fill="#7dd3fc">STORMWATER</text>
+                    <rect x="185" y="100" width="30" height="40" rx="3" fill="#1e3a52" stroke="#3a5a72" stroke-width="1"/>
+                    <line x1="200" y1="85" x2="200" y2="100" stroke="#7dd3fc" stroke-width="2" marker-end="url(#arr)"/>
+                    <text x="400" y="72" text-anchor="middle" font-family="'Courier Prime', monospace" font-size="10" letter-spacing="0.1em" fill="#a16207">HOUSEHOLD SEWAGE</text>
+                    <polygon points="400,82 382,100 418,100" fill="none" stroke="#a16207" stroke-width="1.5"/>
+                    <rect x="388" y="100" width="24" height="20" fill="none" stroke="#a16207" stroke-width="1.5"/>
+                    <rect x="395" y="108" width="10" height="12" fill="none" stroke="#a16207" stroke-width="1"/>
+                    <rect x="385" y="120" width="30" height="20" rx="3" fill="#2a1a0a" stroke="#6b4c2a" stroke-width="1"/>
+                    <line x1="400" y1="100" x2="400" y2="120" stroke="#ca8a04" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+                    <rect x="100" y="168" width="480" height="44" rx="6" fill="#0f1e2e" stroke="#2a4a6a" stroke-width="1.5"/>
+                    <text x="340" y="195" text-anchor="middle" font-family="'Courier Prime', monospace" font-size="10" letter-spacing="0.12em" fill="#475569">COMBINED SEWER PIPE</text>
+                    <line x1="200" y1="140" x2="200" y2="168" stroke="#7dd3fc" stroke-width="2" marker-end="url(#arr)"/>
+                    <line x1="400" y1="140" x2="400" y2="168" stroke="#ca8a04" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+                    <line x1="100" y1="190" x2="50" y2="190" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr)"/>
+                    <rect x="8" y="174" width="42" height="32" rx="4" fill="#14532d" stroke="#16a34a" stroke-width="1"/>
+                    <text x="29" y="186" text-anchor="middle" font-family="'Courier Prime', monospace" font-size="8" fill="#86efac">TREAT-</text>
+                    <text x="29" y="197" text-anchor="middle" font-family="'Courier Prime', monospace" font-size="8" fill="#86efac">MENT</text>
+                    <rect x="580" y="155" width="18" height="70" rx="3" fill="#7f1d1d" stroke="#dc2626" stroke-width="1.5"/>
+                    <text x="596" y="152" text-anchor="start" font-family="'Courier Prime', monospace" font-size="9" fill="#fca5a5">CSO OUTFALL</text>
+                    <path d="M598,180 Q640,150 680,170" stroke="#E24B4A" stroke-width="2" fill="none" marker-end="url(#arr-red)"/>
+                    <path d="M598,195 Q650,175 680,200" stroke="#E24B4A" stroke-width="2" fill="none" marker-end="url(#arr-red)"/>
+                    <path d="M630,150 Q680,165 720,155 Q760,145 800,160" stroke="#1d4ed8" stroke-width="2.5" fill="none"/>
+                    <path d="M640,175 Q685,192 730,180 Q770,168 800,185" stroke="#1d4ed8" stroke-width="2" fill="none" opacity="0.7"/>
+                    <path d="M650,205 Q695,218 740,207 Q775,198 800,212" stroke="#1d4ed8" stroke-width="1.5" fill="none" opacity="0.5"/>
+                    <text x="740" y="230" text-anchor="middle" font-family="'Courier Prime', monospace" font-size="10" letter-spacing="0.1em" fill="#93c5fd">RED RIVER</text>
+                    <rect x="598" y="252" width="180" height="50" rx="4" fill="#450a0a" stroke="#dc2626" stroke-width="1"/>
+                    <text x="688" y="270" text-anchor="middle" font-family="'Courier Prime', monospace" font-size="9" letter-spacing="0.08em" fill="#fca5a5">DURING HEAVY RAIN</text>
+                    <text x="688" y="285" text-anchor="middle" font-family="'Courier Prime', monospace" font-size="9" fill="#f87171">~22 times per year</text>
+                    <text x="688" y="298" text-anchor="middle" font-family="'Courier Prime', monospace" font-size="9" fill="#f87171">76 outfalls citywide</text>
+                    <rect x="100" y="270" width="160" height="50" rx="4" fill="transparent" stroke="#1e3a52" stroke-width="0.5"/>
+                    <line x1="115" y1="284" x2="135" y2="284" stroke="#7dd3fc" stroke-width="1.5"/>
+                    <text x="140" y="287" font-family="'Courier Prime', monospace" font-size="9" fill="#7dd3fc">Stormwater</text>
+                    <line x1="115" y1="300" x2="135" y2="300" stroke="#ca8a04" stroke-width="1.5" stroke-dasharray="4,3"/>
+                    <text x="140" y="303" font-family="'Courier Prime', monospace" font-size="9" fill="#ca8a04">Sewage</text>
+                    <line x1="115" y1="316" x2="135" y2="316" stroke="#E24B4A" stroke-width="1.5"/>
+                    <text x="140" y="319" font-family="'Courier Prime', monospace" font-size="9" fill="#E24B4A">Overflow</text>
                 </svg>
+                <p class="text-white/30 text-xs font-mono mt-3 px-2">Source: City of Winnipeg Water and Waste Department</p>
             </div>
         </div>
 
