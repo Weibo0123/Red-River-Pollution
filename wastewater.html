@@ -47,22 +47,49 @@
         </div>
 
         <!-- Stats -->
+        <!-- Stats / Minimal Dossier -->
         <div class="scroll-reveal mb-32">
-            <div class="relative bg-slate-900/20 rounded p-8 border border-white/5">
-                <p class="doc-caption text-white/40 mb-6">THE FACTS</p>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div>
-                        <p class="stat-number text-white/80 mb-2">76</p>
-                        <p class="text-white/50 text-sm leading-relaxed">Combined sewer outfall points discharging to Winnipeg's rivers</p>
+            <div class="archive-panel relative overflow-hidden rounded-sm border border-white/10 bg-[
+]/80 p-8 md:p-10">
+
+                <!-- subtle paper lines -->
+                <div
+                        class="absolute inset-0 opacity-[0.045] pointer-events-none"
+                        style="background-image: linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px); background-size: 100% 28px;">
+                </div>
+
+                <!-- corner marks -->
+                <div class="absolute top-4 left-4 w-8 h-8 border-t border-l border-white/20"></div>
+                <div class="absolute top-4 right-4 w-8 h-8 border-t border-r border-white/20"></div>
+                <div class="absolute bottom-4 left-4 w-8 h-8 border-b border-l border-white/20"></div>
+                <div class="absolute bottom-4 right-4 w-8 h-8 border-b border-r border-white/20"></div>
+                <div class="relative z-10 mb-10">
+                    <p class="doc-caption text-white/40">THE FACTS</p>
+                </div>
+                <div class="relative z-10 grid md:grid-cols-3 border-t border-white/10">
+                    <div class="py-8 md:pr-8 border-b md:border-b-0 md:border-r border-white/10">
+                        <p class="stat-number text-white/90 mb-5">76</p>
+                        <p class="text-white/50 text-sm leading-relaxed">
+                            Combined sewer outfalls
+                        </p>
                     </div>
-                    <div>
-                        <p class="stat-number text-white/80 mb-2">~22</p>
-                        <p class="text-white/50 text-sm leading-relaxed">Average overflow events per outfall each year</p>
+                    <div class="py-8 md:px-8 border-b md:border-b-0 md:border-r border-white/10">
+                        <p class="stat-number text-white/90 mb-5">~22</p>
+                        <p class="text-white/50 text-sm leading-relaxed">
+                            Overflow events per year
+                        </p>
                     </div>
-                    <div>
-                        <p class="stat-number text-white/80 mb-2">Billions L</p>
-                        <p class="text-white/50 text-sm leading-relaxed">Of partially treated sewage released annually</p>
+                    <div class="py-8 md:pl-8">
+                        <p class="stat-number text-white/90 mb-2">Billions</p>
+                        <p class="text-white/50 text-sm leading-relaxed">
+                            of litres released annually
+                        </p>
                     </div>
+                </div>
+                <div class="relative z-10 mt-8 pt-5 border-t border-white/10">
+                    <p class="font-mono text-[10px] tracking-[0.16em] text-white/25">
+                        SOURCE: CITY OF WINNIPEG WATER AND WASTE DEPARTMENT
+                    </p>
                 </div>
             </div>
         </div>
@@ -168,7 +195,7 @@
                     <rect x="0" y="166" width="118" height="48" rx="4" fill="#14532d" stroke="#16a34a" stroke-width="1.5"/>
                     <text x="59" y="189" text-anchor="middle" font-family="'Courier Prime', monospace" font-size="11" fill="#86efac">TREATMENT</text>
                     <rect x="580" y="155" width="18" height="70" rx="3" fill="#7f1d1d" stroke="#dc2626" stroke-width="1.5"/>
-                    <text x="596" y="152" text-anchor="start" font-family="'Courier Prime', monospace" font-size="9" fill="#fca5a5">CSO OUTFALL</text>
+                    <text x="596" y="140" text-anchor="start" font-family="'Courier Prime', monospace" font-size="9" fill="#fca5a5">CSO OUTFALL</text>
                     <path d="M598,180 Q640,150 680,170" stroke="#E24B4A" stroke-width="3" fill="none" marker-end="url(#arr-red)"/>
                     <path d="M598,195 Q650,175 680,200" stroke="#E24B4A" stroke-width="3" fill="none" marker-end="url(#arr-red)"/>
                     <path d="M630,150 Q680,165 720,155 Q760,145 800,160" stroke="#1d4ed8" stroke-width="2.5" fill="none"/>
@@ -195,7 +222,7 @@
                     <text x="614" y="72" font-family="'Courier Prime', monospace" font-size="10" fill="#7dd3fc" opacity="0.7">overflow into the Red River.</text>
                     </g>
                 </svg>
-                <p class="text-white/30 text-xs font-mono mt-3 px-2">Source: City of Winnipeg Water and Waste Department</p>
+                <p class="text-white/30 text-xs font-mono mt-3 px-2">SOURCE: CITY OF WINNIPEG WATER AND WASTE DEPARTMENT</p>
             </div>
         </div>
 
