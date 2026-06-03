@@ -44,13 +44,6 @@ body {
     opacity: 0.5;
     font-weight: 600;
 }
-.stat-number {
-    font-family: 'Playfair Display', serif;
-    font-weight: 400;
-    font-size: 2.5rem;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-}
 
 /* ── Film Grain ── */
 @keyframes filmGrain {
@@ -141,6 +134,37 @@ body {
     font-size: clamp(3.25rem, 7vw, 5.75rem);
     line-height: 0.85;
     letter-spacing: -0.06em;
+}
+
+.system-chain {
+    box-shadow:
+            0 28px 80px rgba(0, 0, 0, 0.42),
+            inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+.system-chain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+            radial-gradient(circle at 18% 8%, rgba(125, 211, 252, 0.055), transparent 34%),
+            radial-gradient(circle at 88% 92%, rgba(127, 29, 29, 0.12), transparent 38%);
+}
+
+.system-chain::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.16),
+            transparent
+    );
 }
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 8px; }

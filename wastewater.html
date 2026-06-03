@@ -43,14 +43,13 @@
         <div class="scroll-reveal mb-24">
             <p class="doc-caption text-white/40 mb-4">CHAPTER TWO</p>
             <h1 class="doc-title text-white mb-8">Wastewater &amp;<br>Modern Winnipeg</h1>
-            <p class="text-white/60 text-lg leading-relaxed max-w-3xl">Beneath the city, an aging system fails. Every heavy rain, billions of litres of raw or partially treated sewage flow directly into the Red River. It is not an accident — it is infrastructure.</p>
+            <p class="text-white/60 text-lg leading-relaxed max-w-3xl">Beneath the city, an aging system fails. Every heavy rain, billions of litres of raw or partially treated sewage flow directly into the Red River. It is not an accident, it is infrastructure.</p>
         </div>
 
         <!-- Stats -->
         <!-- Stats / Minimal Dossier -->
         <div class="scroll-reveal mb-32">
-            <div class="archive-panel relative overflow-hidden rounded-sm border border-white/10 bg-[
-]/80 p-8 md:p-10">
+            <div class="archive-panel relative overflow-hidden rounded-sm border border-white/10 bg-slate-900/80 p-8 md:p-10">
 
                 <!-- subtle paper lines -->
                 <div
@@ -227,18 +226,144 @@
         </div>
 
         <!-- Why this continues -->
-        <div class="scroll-reveal">
-            <h2 class="doc-title text-xl text-white mb-8">Why This Continues</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="border-l border-white/20 pl-8">
-                    <h3 class="text-white font-display text-lg mb-3">Cost</h3>
-                    <p class="text-white/60 text-sm leading-relaxed">Separating the combined system would cost billions. Infrastructure upgrades compete with other municipal priorities.</p>
+        <!-- Why This Continues / Cause Chain -->
+        <div class="scroll-reveal mb-24">
+
+            <div class="system-chain relative overflow-hidden rounded-sm border border-white/10 bg-slate-900/90 p-8 md:p-12">
+
+                <!-- faint map / scan texture -->
+                <div
+                        class="absolute inset-0 opacity-[0.035] pointer-events-none"
+                        style="
+                background-image:
+                    linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255,255,255,.25) 1px, transparent 1px);
+                background-size: 100% 34px, 72px 100%;
+            ">
                 </div>
-                <div class="border-l border-white/20 pl-8">
-                    <h3 class="text-white font-display text-lg mb-3">Invisibility</h3>
-                    <p class="text-white/60 text-sm leading-relaxed">The problem is underground and invisible to most residents, reducing public pressure for change.</p>
+
+                <!-- cold glow -->
+                <div class="absolute -top-24 -left-24 w-72 h-72 bg-sky-300/5 blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-28 right-0 w-80 h-80 bg-red-900/10 blur-3xl pointer-events-none"></div>
+
+                <!-- Header -->
+                <div class="relative z-10 max-w-3xl mb-14">
+                    <p class="doc-caption text-white/40 mb-4">SYSTEM NOTE</p>
+                    <h2 class="doc-title text-xl md:text-2xl text-white mb-4">
+                        Why the system is not fixed
+                    </h2>
+                    <p class="text-white/45 text-sm md:text-base leading-relaxed max-w-2xl">
+                        The issue persists less as a single failure than as a chain of structural conditions:
+                        cost, age, invisibility, and accepted risk.
+                    </p>
                 </div>
+
+                <!-- Cause chain -->
+                <div class="relative z-10">
+
+                    <!-- vertical line -->
+                    <div class="absolute left-[9px] top-2 bottom-2 w-px bg-white/15 hidden md:block"></div>
+
+                    <div class="space-y-10">
+
+                        <!-- item 1 -->
+                        <div class="relative md:grid md:grid-cols-[180px_1fr] md:gap-10">
+                            <div class="hidden md:flex items-start gap-4">
+                        <span class="mt-1 w-[19px] h-[19px] rounded-full border border-white/25 bg-slate-900"></span>
+                                <p class="font-mono text-[10px] tracking-[0.22em] text-white/30 pt-1">
+                                    COST
+                                </p>
+                            </div>
+
+                            <div class="border-l md:border-l-0 border-white/15 pl-6 md:pl-0">
+                                <h3 class="font-display text-white/85 text-lg mb-3">
+                                    Capital cost
+                                </h3>
+                                <p class="text-white/55 text-sm leading-relaxed max-w-3xl">
+                                    Separating combined sewer infrastructure requires multi-billion dollar reconstruction.
+                                    Projects compete with housing, transit, and road maintenance budgets.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- item 2 -->
+                        <div class="relative md:grid md:grid-cols-[180px_1fr] md:gap-10">
+                            <div class="hidden md:flex items-start gap-4">
+                        <span class="mt-1 w-[19px] h-[19px] rounded-full border border-white/25 bg-slate-900"></span>
+                                <p class="font-mono text-[10px] tracking-[0.22em] text-white/30 pt-1">
+                                    INERTIA
+                                </p>
+                            </div>
+
+                            <div class="border-l md:border-l-0 border-white/15 pl-6 md:pl-0">
+                                <h3 class="font-display text-white/85 text-lg mb-3">
+                                    System inertia
+                                </h3>
+                                <p class="text-white/55 text-sm leading-relaxed max-w-3xl">
+                                    The network was built over decades. Full replacement would require decades more disruption
+                                    across residential and industrial zones.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- item 3 -->
+                        <div class="relative md:grid md:grid-cols-[180px_1fr] md:gap-10">
+                            <div class="hidden md:flex items-start gap-4">
+                        <span class="mt-1 w-[19px] h-[19px] rounded-full border border-white/25 bg-slate-900"></span>
+                                <p class="font-mono text-[10px] tracking-[0.22em] text-white/30 pt-1">
+                                    VISIBILITY
+                                </p>
+                            </div>
+
+                            <div class="border-l md:border-l-0 border-white/15 pl-6 md:pl-0">
+                                <h3 class="font-display text-white/85 text-lg mb-3">
+                                    Invisibility
+                                </h3>
+                                <p class="text-white/55 text-sm leading-relaxed max-w-3xl">
+                                    The infrastructure is underground. Failures are not continuously visible,
+                                    reducing sustained public pressure.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- item 4 / conclusion -->
+                        <div class="relative md:grid md:grid-cols-[180px_1fr] md:gap-10">
+                            <div class="hidden md:flex items-start gap-4">
+                                <span class="mt-1 w-[19px] h-[19px] rounded-full border border-red-300/40 bg-red-950/40 shadow-[0_0_24px_rgba(248,113,113,0.15)]"></span>
+                                <p class="font-mono text-[10px] tracking-[0.22em] text-red-300/45 pt-1">
+                                    RISK
+                                </p>
+                            </div>
+
+                            <div class="relative border-l md:border-l-0 border-red-300/25 pl-6 md:pl-0">
+                                <div class="absolute -left-px top-0 bottom-0 w-px bg-red-300/25 md:hidden"></div>
+
+                                <h3 class="font-display text-red-100/80 text-lg mb-3">
+                                    Accepted risk
+                                </h3>
+                                <p class="text-white/55 text-sm leading-relaxed max-w-3xl">
+                                    Overflow events are treated as statistically acceptable under current design standards
+                                    during extreme weather conditions.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- Footer note -->
+                <div class="relative z-10 mt-14 pt-6 border-t border-white/10 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                    <p class="font-mono text-[10px] tracking-[0.16em] text-white/25">
+                        STATUS / ONGOING CONDITION
+                    </p>
+                    <p class="font-mono text-[10px] tracking-[0.16em] text-red-300/40">
+                        CLASSIFICATION / STRUCTURAL
+                    </p>
+                </div>
+
             </div>
+
         </div>
 
     </div>
