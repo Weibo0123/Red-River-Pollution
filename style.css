@@ -129,6 +129,116 @@ body {
             radial-gradient(circle at 85% 85%, rgba(185, 28, 28, 0.10), transparent 36%);
 }
 
+.bibliography-panel {
+    box-shadow:
+            0 32px 95px rgba(0, 0, 0, 0.46),
+            inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.bibliography-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+            radial-gradient(circle at 18% 8%, rgba(125, 211, 252, 0.07), transparent 34%),
+            radial-gradient(circle at 86% 88%, rgba(127, 29, 29, 0.09), transparent 38%);
+}
+
+.bibliography-group {
+    display: grid;
+    grid-template-columns: 170px 1fr;
+    gap: 2.5rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bibliography-group-last {
+    border-bottom: none;
+}
+
+.bibliography-group-label {
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    color: rgba(255, 255, 255, 0.32);
+    padding-top: 0.35rem;
+}
+
+.bibliography-entry {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 1.25rem;
+    padding-bottom: 1.75rem;
+    margin-bottom: 1.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bibliography-entry:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.bibliography-index {
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    color: rgba(255, 255, 255, 0.28);
+}
+
+.bibliography-title {
+    font-family: 'IM Fell English', Georgia, serif;
+    font-size: 1.15rem;
+    line-height: 1.25;
+    color: rgba(255, 255, 255, 0.82);
+    margin-bottom: 0.5rem;
+}
+
+.bibliography-meta {
+    color: rgba(255, 255, 255, 0.46);
+    font-size: 0.9rem;
+    line-height: 1.65;
+    max-width: 42rem;
+    margin-bottom: 0.75rem;
+}
+
+.bibliography-link {
+    display: inline-block;
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    color: rgba(147, 197, 253, 0.5);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(147, 197, 253, 0.22);
+    transition:
+            color 0.35s ease,
+            border-color 0.35s ease;
+}
+
+.bibliography-link:hover {
+    color: rgba(191, 219, 254, 0.85);
+    border-color: rgba(191, 219, 254, 0.55);
+}
+
+@media (max-width: 768px) {
+    .bibliography-group {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .bibliography-entry {
+        grid-template-columns: 34px 1fr;
+        gap: 1rem;
+    }
+
+    .bibliography-title {
+        font-size: 1.05rem;
+    }
+}
+
+
+
 .stat-number {
     font-family: var(--font-display, Georgia, serif);
     font-size: clamp(3.25rem, 7vw, 5.75rem);
