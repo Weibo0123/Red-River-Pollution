@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Red River — Bibliography</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-700" id="main-nav" style="background: transparent;">
+  <div class="px-6 md:px-12 py-6 flex items-center justify-between">
+    <div class="font-display text-lg tracking-widest cursor-pointer text-white/60 hover:text-white/100 transition-colors" onclick="navigateTo('home')">
+      RED RIVER
+    </div>
+
+    <div class="hidden md:flex items-center gap-12 text-xs tracking-widest">
+      <a class="nav-link text-white/40 cursor-pointer" data-page="home" onclick="navigateTo('home')">HOME</a>
+      <a class="nav-link text-white/40 cursor-pointer" data-page="history" onclick="navigateTo('history')">HISTORY</a>
+      <a class="nav-link text-white/40 cursor-pointer" data-page="wastewater" onclick="navigateTo('wastewater')">WASTEWATER</a>
+      <a class="nav-link text-white/40 cursor-pointer" data-page="environment" onclick="navigateTo('environment')">ENVIRONMENT</a>
+      <a class="nav-link text-white/40 cursor-pointer" data-page="bibliography" onclick="navigateTo('bibliography')">BIBLIOGRAPHY</a>
+    </div>
+
+    <button class="md:hidden text-white/70" onclick="toggleMobile()">
+      <i data-lucide="menu" class="w-5 h-5"></i>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-black/90 backdrop-blur px-6 py-6 space-y-4 border-t border-white/5">
+    <a class="block text-white/90 cursor-pointer tracking-widest text-xs" onclick="navigateTo('home'); toggleMobile()">HOME</a>
+    <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('history'); toggleMobile()">HISTORY</a>
+    <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('wastewater'); toggleMobile()">WASTEWATER</a>
+    <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('environment'); toggleMobile()">ENVIRONMENT</a>
+    <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('bibliography'); toggleMobile()">BIBLIOGRAPHY</a>
+  </div>
+</nav>
+
+<!-- BIBLIOGRAPHY -->
+<section class="w-full min-h-screen pt-32 pb-16 px-8 md:px-16">
+  <div class="grain"></div>
+
+  <div class="max-w-5xl mx-auto relative z-10">
+
+    <!-- Header -->
+    <div class="scroll-reveal mb-20">
+      <p class="doc-caption text-white/40 mb-4">RESEARCH INDEX</p>
+      <h1 class="doc-title text-white mb-8">
+        Bibliography<br>&amp; Source Notes
+      </h1>
+
+      <p class="text-white/60 text-lg leading-relaxed max-w-3xl">
+        A working archive of reports, imagery, municipal records, and environmental research
+        used to construct this documentary web experience.
+      </p>
+    </div>
+
+    <!-- Source Ledger -->
+    <div class="scroll-reveal mb-24">
+      <div class="bibliography-panel relative overflow-hidden rounded-sm border border-white/10 p-8 md:p-10" style="background-color: rgba(13, 17, 23, 0.85);">
+
+      <!-- subtle paper lines -->
+        <div
+                class="absolute inset-0 opacity-[0.04] pointer-events-none"
+                style="
+                        background-image:
+                            linear-gradient(rgba(255,255,255,.45) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(255,255,255,.18) 1px, transparent 1px);
+                        background-size: 100% 30px, 80px 100%;
+                    ">
+        </div>
+
+        <!-- corner marks -->
+        <div class="absolute top-4 left-4 w-8 h-8 border-t border-l border-white/20"></div>
+        <div class="absolute top-4 right-4 w-8 h-8 border-t border-r border-white/20"></div>
+        <div class="absolute bottom-4 left-4 w-8 h-8 border-b border-l border-white/20"></div>
+        <div class="absolute bottom-4 right-4 w-8 h-8 border-b border-r border-white/20"></div>
+
+        <!-- panel header -->
+        <div class="relative z-10 mb-10">
+          <p class="doc-caption text-white/40 mb-3">SOURCE LEDGER</p>
+          <h2 class="font-display text-2xl md:text-3xl text-white/90 leading-tight">
+            Documents behind the river.
+          </h2>
+        </div>
+
+        <!-- Bibliography list -->
+        <!-- Bibliography list / Row Ledger -->
+        <div class="relative z-10 border-t border-white/10">
+
+          <!-- Row 01 -->
+          <div class="source-row">
+            <div class="source-number">01</div>
+            <div class="source-category">MUNICIPAL INFRASTRUCTURE</div>
+            <div class="source-content">
+              <p class="source-title">City of Winnipeg Water and Waste Department</p>
+              <p class="source-meta">
+                Combined sewer overflow records, infrastructure notes, wastewater system references.
+              </p>
+              <a href="#" target="_blank" class="source-link">
+                PLACEHOLDER LINK / city-winnipeg-water-waste
+              </a>
+            </div>
+          </div>
+
+          <!-- Row 02 -->
+          <div class="source-row">
+            <div class="source-number">02</div>
+            <div class="source-category">MUNICIPAL INFRASTRUCTURE</div>
+            <div class="source-content">
+              <p class="source-title">Winnipeg Combined Sewer Overflow Management Study</p>
+              <p class="source-meta">
+                Background information on outfall points, overflow frequency, and system limitations.
+              </p>
+              <a href="#" target="_blank" class="source-link">
+                PLACEHOLDER LINK / combined-sewer-overflow-study
+              </a>
+            </div>
+          </div>
+
+          <!-- Row 03 -->
+          <div class="source-row">
+            <div class="source-number">03</div>
+            <div class="source-category">ENVIRONMENTAL RESEARCH</div>
+            <div class="source-content">
+              <p class="source-title">Lake Winnipeg Foundation — State of the Lake Report</p>
+              <p class="source-meta">
+                Research on phosphorus loading, eutrophication, algae blooms, and watershed impacts.
+              </p>
+              <a href="#" target="_blank" class="source-link">
+                PLACEHOLDER LINK / lake-winnipeg-foundation-report
+              </a>
+            </div>
+          </div>
+
+          <!-- Row 04 -->
+          <div class="source-row">
+            <div class="source-number">04</div>
+            <div class="source-category">ENVIRONMENTAL RESEARCH</div>
+            <div class="source-content">
+              <p class="source-title">Lake Winnipeg Research Consortium</p>
+              <p class="source-meta">
+                Scientific context for Lake Winnipeg water quality, nutrient enrichment, and freshwater ecosystem risk.
+              </p>
+              <a href="#" target="_blank" class="source-link">
+                PLACEHOLDER LINK / lake-winnipeg-research-consortium
+              </a>
+            </div>
+          </div>
+
+          <!-- Row 05 -->
+          <div class="source-row">
+            <div class="source-number">05</div>
+            <div class="source-category">ENVIRONMENTAL RESEARCH</div>
+            <div class="source-content">
+              <p class="source-title">Government of Manitoba — Lake Winnipeg Basin Research</p>
+              <p class="source-meta">
+                Provincial research and public information about nutrient loading and watershed management.
+              </p>
+              <a href="#" target="_blank" class="source-link">
+                PLACEHOLDER LINK / manitoba-lake-winnipeg-basin
+              </a>
+            </div>
+          </div>
+
+          <!-- Row 06 -->
+          <div class="source-row">
+            <div class="source-number">06</div>
+            <div class="source-category">HISTORICAL CONTEXT</div>
+            <div class="source-content">
+              <p class="source-title">The Forks National Historic Site</p>
+              <p class="source-meta">
+                Historical context for the Red River, Indigenous gathering places, trade routes, and Winnipeg’s formation.
+              </p>
+              <a href="#" target="_blank" class="source-link">
+                PLACEHOLDER LINK / the-forks-history
+              </a>
+            </div>
+          </div>
+
+          <!-- Row 07 -->
+          <div class="source-row">
+            <div class="source-number">07</div>
+            <div class="source-category">HISTORICAL CONTEXT</div>
+            <div class="source-content">
+              <p class="source-title">Manitoba Historical Society Archive</p>
+              <p class="source-meta">
+                Archival references for Winnipeg, the Red River Settlement, and regional historical development.
+              </p>
+              <a href="#" target="_blank" class="source-link">
+                PLACEHOLDER LINK / manitoba-historical-society
+              </a>
+            </div>
+          </div>
+
+          <!-- Row 08 -->
+          <div class="source-row">
+            <div class="source-number">08</div>
+            <div class="source-category">IMAGERY & MAPS</div>
+            <div class="source-content">
+              <p class="source-title">NASA Earth Observatory / Satellite Imagery</p>
+              <p class="source-meta">
+                Satellite imagery used or referenced for Lake Winnipeg algae bloom visualization.
+              </p>
+              <a href="#" target="_blank" class="source-link">
+                PLACEHOLDER LINK / nasa-lake-winnipeg-imagery
+              </a>
+            </div>
+          </div>
+
+          <!-- Row 09 -->
+          <div class="source-row">
+            <div class="source-number">09</div>
+            <div class="source-category">IMAGERY & MAPS</div>
+            <div class="source-content">
+              <p class="source-title">Archival Map or Image Source</p>
+              <p class="source-meta">
+                Placeholder for any historical map, aerial image, or public-domain archive material used in the project.
+              </p>
+              <a href="#" target="_blank" class="source-link">
+                PLACEHOLDER LINK / archival-map-source
+              </a>
+            </div>
+          </div>
+
+          <!-- Row 10 -->
+          <div class="source-row source-row-last">
+            <div class="source-number">10</div>
+            <div class="source-category">ADDITIONAL NOTES</div>
+            <div class="source-content">
+              <p class="source-title">Additional Source Placeholder</p>
+              <p class="source-meta">
+                Add another report, article, dataset, image credit, interview, or public record here.
+              </p>
+              <a href="#" target="_blank" class="source-link">
+                PLACEHOLDER LINK / additional-source
+              </a>
+            </div>
+          </div>
+
+        </div>
+    </div>
+
+    <!-- Closing note -->
+    <div class="scroll-reveal max-w-3xl">
+      <p class="text-white/55 text-sm leading-relaxed">
+        This bibliography is intended as a transparent source trail rather than a final academic archive.
+        Replace placeholder links with the exact URLs, access dates, reports, datasets, and image credits used in the project.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="w-full py-12 px-8 border-t border-white/5 text-center bg-black">
+  <p class="text-white/30 text-xs font-mono">A documentary web experience about the Red River, Winnipeg, Canada</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

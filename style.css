@@ -144,76 +144,69 @@ body {
             radial-gradient(circle at 18% 8%, rgba(125, 211, 252, 0.07), transparent 34%),
             radial-gradient(circle at 86% 88%, rgba(127, 29, 29, 0.09), transparent 38%);
 }
-
-.bibliography-group {
+.source-row {
+    position: relative;
     display: grid;
-    grid-template-columns: 170px 1fr;
-    gap: 2.5rem;
+    grid-template-columns: 48px 190px 1fr;
+    gap: 2rem;
     padding: 2rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.bibliography-group-last {
+.source-row-last {
     border-bottom: none;
 }
 
-.bibliography-group-label {
-    font-family: 'Courier Prime', 'Courier New', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.22em;
-    color: rgba(255, 255, 255, 0.32);
-    padding-top: 0.35rem;
-}
-
-.bibliography-entry {
-    display: grid;
-    grid-template-columns: 42px 1fr;
-    gap: 1.25rem;
-    padding-bottom: 1.75rem;
-    margin-bottom: 1.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.bibliography-entry:last-child {
-    padding-bottom: 0;
-    margin-bottom: 0;
-    border-bottom: none;
-}
-
-.bibliography-index {
+.source-number {
     font-family: 'Courier Prime', 'Courier New', monospace;
     font-size: 0.65rem;
     letter-spacing: 0.16em;
     color: rgba(255, 255, 255, 0.28);
+    padding-top: 0.35rem;
 }
 
-.bibliography-title {
+.source-category {
+    font-family: 'Courier Prime', 'Courier New', monospace;
+    font-size: 0.62rem;
+    line-height: 1.55;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.32);
+    padding-top: 0.35rem;
+}
+
+.source-title {
     font-family: 'IM Fell English', Georgia, serif;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     line-height: 1.25;
-    color: rgba(255, 255, 255, 0.82);
-    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.84);
+    margin-bottom: 0.45rem;
 }
 
-.bibliography-meta {
+.source-meta {
     color: rgba(255, 255, 255, 0.46);
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     line-height: 1.65;
     max-width: 42rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.8rem;
 }
 
-.bibliography-link {
+.source-link {
     display: inline-block;
     font-family: 'Courier Prime', 'Courier New', monospace;
     font-size: 0.65rem;
     letter-spacing: 0.14em;
-    color: rgba(147, 197, 253, 0.5);
+    color: rgba(147, 197, 253, 0.52);
     text-decoration: none;
     border-bottom: 1px solid rgba(147, 197, 253, 0.22);
     transition:
             color 0.35s ease,
             border-color 0.35s ease;
+}
+
+.source-link:hover {
+    color: rgba(191, 219, 254, 0.88);
+    border-color: rgba(191, 219, 254, 0.55);
 }
 
 .bibliography-link:hover {
@@ -222,20 +215,36 @@ body {
 }
 
 @media (max-width: 768px) {
-    .bibliography-group {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-    }
-
-    .bibliography-entry {
-        grid-template-columns: 34px 1fr;
+    .source-row {
+        grid-template-columns: 36px 1fr;
         gap: 1rem;
+        padding: 1.75rem 0;
     }
 
-    .bibliography-title {
-        font-size: 1.05rem;
+    .source-category {
+        grid-column: 2;
+        font-size: 0.58rem;
+        margin-bottom: 0.35rem;
+    }
+
+    .source-content {
+        grid-column: 2;
+    }
+
+    .source-title {
+        font-size: 1.08rem;
+    }
+
+    .source-meta {
+        font-size: 0.88rem;
+    }
+
+    .source-link {
+        font-size: 0.58rem;
+        word-break: break-word;
     }
 }
+
 
 
 
