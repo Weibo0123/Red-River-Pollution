@@ -4,13 +4,14 @@
 
 // ── Page map: id → file ──
 const PAGE_FILES = {
-    home:        'index.html',
-    history:     'history.html',
-    wastewater:  'wastewater.html',
-    environment: 'environment.html'
+    home:         'index.html',
+    history:      'history.html',
+    wastewater:   'wastewater.html',
+    environment:  'environment.html',
+    bibliography: 'bibliography.html'
 };
 
-// Detect current page from filename
+// Detect the current page from the filename
 function getCurrentPage() {
     const path = window.location.pathname.split('/').pop() || 'index.html';
     for (const [key, file] of Object.entries(PAGE_FILES)) {
