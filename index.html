@@ -13,31 +13,7 @@
 <!-- Background -->
 <div style="position:fixed; inset:0; z-index:-1; background: linear-gradient(180deg, #1a2a3a 0%, #0f1a2a 40%, #050808 100%); background-attachment: fixed;"></div>
 
-<!-- Navigation -->
-<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-700" id="main-nav" style="background: transparent;">
-    <div class="px-6 md:px-12 py-6 flex items-center justify-between">
-        <div class="font-display text-lg tracking-widest cursor-pointer text-white/60 hover:text-white/100 transition-colors" onclick="navigateTo('home')">
-            RED RIVER
-        </div>
-        <div class="hidden md:flex items-center gap-12 text-xs tracking-widest">
-            <a class="nav-link text-white/40 cursor-pointer" data-page="home"         onclick="navigateTo('home')">HOME</a>
-            <a class="nav-link text-white/40 cursor-pointer" data-page="history"      onclick="navigateTo('history')">HISTORY</a>
-            <a class="nav-link text-white/40 cursor-pointer" data-page="wastewater"   onclick="navigateTo('wastewater')">WASTEWATER</a>
-            <a class="nav-link text-white/40 cursor-pointer" data-page="environment"  onclick="navigateTo('environment')">ENVIRONMENT</a>
-            <a class="nav-link text-white/40 cursor-pointer" data-page="bibliography" onclick="navigateTo('bibliography')">BIBLIOGRAPHY</a>
-        </div>
-        <button class="md:hidden text-white/70" onclick="toggleMobile()">
-            <i data-lucide="menu" class="w-5 h-5"></i>
-        </button>
-    </div>
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-black/90 backdrop-blur px-6 py-6 space-y-4 border-t border-white/5">
-        <a class="block text-white/90 cursor-pointer tracking-widest text-xs" onclick="navigateTo('home'); toggleMobile()">HOME</a>
-        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('history'); toggleMobile()">HISTORY</a>
-        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('wastewater'); toggleMobile()">WASTEWATER</a>
-        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('environment'); toggleMobile()">ENVIRONMENT</a>
-    </div>
-</nav>
+<div id="nav-root"></div>
 
 <!-- HOME: Cinematic Split -->
 <section class="relative w-full min-h-screen bg-black">

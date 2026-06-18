@@ -10,129 +10,106 @@
 </head>
 <body>
 
-<!-- Navigation -->
-<nav class="fixed top-0 left-0 w-full z-50 transition-all duration-700" id="main-nav" style="background: transparent;">
-    <div class="px-6 md:px-12 py-6 flex items-center justify-between">
-        <div class="font-display text-lg tracking-widest cursor-pointer text-white/60 hover:text-white/100 transition-colors" onclick="navigateTo('home')">
-            RED RIVER
-        </div>
-        <div class="hidden md:flex items-center gap-12 text-xs tracking-widest">
-            <a class="nav-link text-white/40 cursor-pointer" data-page="home"         onclick="navigateTo('home')">HOME</a>
-            <a class="nav-link text-white/40 cursor-pointer" data-page="history"      onclick="navigateTo('history')">HISTORY</a>
-            <a class="nav-link text-white/40 cursor-pointer" data-page="wastewater"   onclick="navigateTo('wastewater')">WASTEWATER</a>
-            <a class="nav-link text-white/40 cursor-pointer" data-page="environment"  onclick="navigateTo('environment')">ENVIRONMENT</a>
-            <a class="nav-link text-white/40 cursor-pointer" data-page="bibliography" onclick="navigateTo('bibliography')">BIBLIOGRAPHY</a>
-        </div>
-        <button class="md:hidden text-white/70" onclick="toggleMobile()">
-            <i data-lucide="menu" class="w-5 h-5"></i>
-        </button>
-    </div>
-    <div id="mobile-menu" class="hidden md:hidden bg-black/90 backdrop-blur px-6 py-6 space-y-4 border-t border-white/5">
-        <a class="block text-white/90 cursor-pointer tracking-widest text-xs" onclick="navigateTo('home'); toggleMobile()">HOME</a>
-        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('history'); toggleMobile()">HISTORY</a>
-        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('wastewater'); toggleMobile()">WASTEWATER</a>
-        <a class="block text-white/40 cursor-pointer tracking-widest text-xs" onclick="navigateTo('environment'); toggleMobile()">ENVIRONMENT</a>
-    </div>
-</nav>
+<div id="nav-root"></div>
 
 <!-- HISTORY: Vertical Timeline -->
-    <div class="grain"></div>
-    <div class="max-w-6xl mx-auto relative z-10">
+<div class="grain"></div>
+<div class="max-w-6xl mx-auto relative z-10">
 
-        <!-- Header -->
-        <div class="scroll-reveal mb-32 text-center">
-            <h1 class="doc-title text-white mb-4">History of the<br>Red River</h1>
-            <p class="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto">A journey through six millennia of human connection to these waters.</p>
+    <!-- Header -->
+    <div class="scroll-reveal mb-32 text-center">
+        <h1 class="doc-title text-white mb-4">History of the<br>Red River</h1>
+        <p class="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto">A journey through six millennia of human connection to these waters.</p>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative">
+        <!-- Center line (desktop) -->
+        <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-gradient-to-b from-white/10 via-white/5 to-transparent"></div>
+
+        <!-- Item 1: Left — Indigenous & Forks -->
+        <div class="scroll-reveal mb-32 md:mb-40">
+            <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+                <div class="md:text-right md:pr-12">
+                    <p class="doc-caption text-white/40 mb-2">6,000+ YEARS AGO</p>
+                    <h2 class="doc-subtitle text-white mb-6">First Nations People</h2>
+                    <p class="text-white/60 leading-relaxed text-sm mb-4">Started 6000 years ago, Indigenous nations have depended on this river. The Red River was one of their main food sources. It provides various kinds of fish, waterfowl and edible plants. The river shaped daily life. It determined when to harvest and  move.</p>
+                    <p class="text-white/60 leading-relaxed text-sm mb-4">At the confluence of the Red and Assiniboine rivers, The Forks has been a gathering place for thousands of years. Trade, ceremony and seasonal gatherings happened here long before European arrived. The rivers also supports transportation, canoes carried good across complex waterways. This confluence has long been important.</p>
+                </div>
+                <div class="mt-8 md:mt-0">
+                    <div class="relative h-64 md:h-72 rounded overflow-hidden cinematic-image border border-white/10">
+                        <img src="img/timeline1.png" alt="First Nations People" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/30 rounded-full ring-2 ring-white/10" style="top: 6rem;"></div>
+            </div>
         </div>
 
-        <!-- Timeline -->
-        <div class="relative">
-            <!-- Center line (desktop) -->
-            <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-gradient-to-b from-white/10 via-white/5 to-transparent"></div>
-
-            <!-- Item 1: Left — Indigenous & Forks -->
-            <div class="scroll-reveal mb-32 md:mb-40">
-                <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
-                    <div class="md:text-right md:pr-12">
-                        <p class="doc-caption text-white/40 mb-2">6,000+ YEARS AGO</p>
-                        <h2 class="doc-subtitle text-white mb-6">First Nations People</h2>
-                        <p class="text-white/60 leading-relaxed text-sm mb-4">Started 6000 years ago, Indigenous nations have depended on this river. The Red River was one of their main food sources. It provides various kinds of fish, waterfowl and edible plants. The river shaped daily life. It determined when to harvest and  move.</p>
-                        <p class="text-white/60 leading-relaxed text-sm mb-4">At the confluence of the Red and Assiniboine rivers, The Forks has been a gathering place for thousands of years. Trade, ceremony and seasonal gatherings happened here long before European arrived. The rivers also supports transportation, canoes carried good across complex waterways. This confluence has long been important.</p>
+        <!-- Item 2: Right — Fur Trade -->
+        <div class="scroll-reveal mb-32 md:mb-40">
+            <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+                <div class="hidden md:block">
+                    <div class="relative h-72 rounded overflow-hidden cinematic-image border border-white/10">
+                        <img src="img/timeline2.png" alt="The Fur Trade Era" class="absolute inset-0 w-full h-full object-cover">
                     </div>
-                    <div class="mt-8 md:mt-0">
-                        <div class="relative h-64 md:h-72 rounded overflow-hidden cinematic-image border border-white/10">
-                            <img src="img/timeline1.png" alt="First Nations People" class="absolute inset-0 w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/30 rounded-full ring-2 ring-white/10" style="top: 6rem;"></div>
                 </div>
-            </div>
-
-            <!-- Item 2: Right — Fur Trade -->
-            <div class="scroll-reveal mb-32 md:mb-40">
-                <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
-                    <div class="hidden md:block">
-                        <div class="relative h-72 rounded overflow-hidden cinematic-image border border-white/10">
-                            <img src="img/timeline2.png" alt="The Fur Trade Era" class="absolute inset-0 w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <div class="md:pl-12">
-                        <p class="doc-caption text-white/40 mb-2">1700s — 1800s</p>
-                        <h2 class="doc-subtitle text-white mb-6">Fur Trade</h2>
-                        <p class="text-white/60 leading-relaxed text-sm">European fur traders saw the Red River as an important route in inland regions. The Hudson's Bay Company and North West Company set up trading posts near the river. On the Red River, voyageurs rowed large canoes full of beaver pelts,  reshaped the region's cultural identity.</p>
-                    </div>
-                    <div class="md:hidden mt-8">
-                        <div class="relative h-64 rounded overflow-hidden cinematic-image border border-white/10">
-                            <img src="img/timeline2.png" alt="The Fur Trade Era" class="absolute inset-0 w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/30 rounded-full ring-2 ring-white/10" style="top: 6rem;"></div>
+                <div class="md:pl-12">
+                    <p class="doc-caption text-white/40 mb-2">1700s — 1800s</p>
+                    <h2 class="doc-subtitle text-white mb-6">Fur Trade</h2>
+                    <p class="text-white/60 leading-relaxed text-sm">European fur traders saw the Red River as an important route in inland regions. The Hudson's Bay Company and North West Company set up trading posts near the river. On the Red River, voyageurs rowed large canoes full of beaver pelts,  reshaped the region's cultural identity.</p>
                 </div>
-            </div>
-
-            <!-- Item 3: Left — Settlers & Agriculture -->
-            <div class="scroll-reveal mb-32 md:mb-40">
-                <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
-                    <div class="md:text-right md:pr-12">
-                        <p class="doc-caption text-white/40 mb-2">1812 ONWARD</p>
-                        <h2 class="doc-subtitle text-white mb-6">Settlers &amp; Agriculture</h2>
-                        <p class="text-white/60 leading-relaxed text-sm">The Selkirk Settlers arrived in 1812. They relied heavily on the river for water and transportation. Agriculture quickly became the cornerstone of the region. Many artists recorded this period in their paintings: farms, river crossings, and the work of settlers.</p>
+                <div class="md:hidden mt-8">
+                    <div class="relative h-64 rounded overflow-hidden cinematic-image border border-white/10">
+                        <img src="img/timeline2.png" alt="The Fur Trade Era" class="absolute inset-0 w-full h-full object-cover">
                     </div>
-                    <div class="mt-8 md:mt-0">
-                        <div class="relative h-64 md:h-72 rounded overflow-hidden cinematic-image border border-white/10">
-                            <img src="img/timeline3.jpeg" alt="Settlers & Agriculture" class="absolute inset-0 w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/30 rounded-full ring-2 ring-white/10" style="top: 6rem;"></div>
                 </div>
+                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/30 rounded-full ring-2 ring-white/10" style="top: 6rem;"></div>
             </div>
+        </div>
 
-            <!-- Item 4: Right — Modern Winnipeg -->
-            <div class="scroll-reveal">
-                <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
-                    <div class="hidden md:block">
-                        <div class="relative h-72 rounded overflow-hidden cinematic-image border border-white/10">
-                            <img src="img/timeline4.png" alt="Modern Winnipeg" class="absolute inset-0 w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <div class="md:pl-12">
-                        <p class="doc-caption text-white/40 mb-2">TODAY</p>
-                        <h2 class="doc-subtitle text-white mb-6">Winnipeg &amp; Manitoba Identity</h2>
-                        <p class="text-white/60 leading-relaxed text-sm mb-4">Winnipeg is built on the rivers. In winter, the frozen surface became a gathering place to enjoy skating and ice fishing. In spring, the flood watch begins. The rivers are still shaping people's daily life.</p>
-                        <p class="text-white/60 leading-relaxed text-sm mb-4"> The Forks has became a public gathering place. Assiniboine Park, and the pathways along the rivers remain an important part of how Winnipeggers experience their city. Winnipeg exists because of these rivers.</p>
-                        <p class="text-white/50 leading-relaxed text-sm mb-4">For many people, the river carries the memory, walking along the water with family, the cold winter air and the geese return in spring. The Red River is deeply ingrained in how Manitobans understand home. It is not just infrastructure. It is part of identity. It is why this city feels like home for Winnipeggers.</p>
-                    </div>
-                    <div class="md:hidden mt-8">
-                        <div class="relative h-64 bg-slate-900/40 rounded overflow-hidden cinematic-image border border-white/10">
-                            <img src="img/timeline4.png" alt="Modern Winnipeg" class="absolute inset-0 w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/30 rounded-full ring-2 ring-white/10" style="top: 6rem;"></div>
+        <!-- Item 3: Left — Settlers & Agriculture -->
+        <div class="scroll-reveal mb-32 md:mb-40">
+            <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+                <div class="md:text-right md:pr-12">
+                    <p class="doc-caption text-white/40 mb-2">1812 ONWARD</p>
+                    <h2 class="doc-subtitle text-white mb-6">Settlers &amp; Agriculture</h2>
+                    <p class="text-white/60 leading-relaxed text-sm">The Selkirk Settlers arrived in 1812. They relied heavily on the river for water and transportation. Agriculture quickly became the cornerstone of the region. Many artists recorded this period in their paintings: farms, river crossings, and the work of settlers.</p>
                 </div>
+                <div class="mt-8 md:mt-0">
+                    <div class="relative h-64 md:h-72 rounded overflow-hidden cinematic-image border border-white/10">
+                        <img src="img/timeline3.jpeg" alt="Settlers & Agriculture" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/30 rounded-full ring-2 ring-white/10" style="top: 6rem;"></div>
             </div>
+        </div>
 
-        </div><!-- /timeline -->
-    </div>
+        <!-- Item 4: Right — Modern Winnipeg -->
+        <div class="scroll-reveal">
+            <div class="md:grid md:grid-cols-2 md:gap-12 md:items-center">
+                <div class="hidden md:block">
+                    <div class="relative h-72 rounded overflow-hidden cinematic-image border border-white/10">
+                        <img src="img/timeline4.png" alt="Modern Winnipeg" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="md:pl-12">
+                    <p class="doc-caption text-white/40 mb-2">TODAY</p>
+                    <h2 class="doc-subtitle text-white mb-6">Winnipeg &amp; Manitoba Identity</h2>
+                    <p class="text-white/60 leading-relaxed text-sm mb-4">Winnipeg is built on the rivers. In winter, the frozen surface became a gathering place to enjoy skating and ice fishing. In spring, the flood watch begins. The rivers are still shaping people's daily life.</p>
+                    <p class="text-white/60 leading-relaxed text-sm mb-4"> The Forks has became a public gathering place. Assiniboine Park, and the pathways along the rivers remain an important part of how Winnipeggers experience their city. Winnipeg exists because of these rivers.</p>
+                    <p class="text-white/50 leading-relaxed text-sm mb-4">For many people, the river carries the memory, walking along the water with family, the cold winter air and the geese return in spring. The Red River is deeply ingrained in how Manitobans understand home. It is not just infrastructure. It is part of identity. It is why this city feels like home for Winnipeggers.</p>
+                </div>
+                <div class="md:hidden mt-8">
+                    <div class="relative h-64 bg-slate-900/40 rounded overflow-hidden cinematic-image border border-white/10">
+                        <img src="img/timeline4.png" alt="Modern Winnipeg" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/30 rounded-full ring-2 ring-white/10" style="top: 6rem;"></div>
+            </div>
+        </div>
+
+    </div><!-- /timeline -->
+</div>
 </section>
 
 <!-- Footer -->
